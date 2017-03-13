@@ -1,12 +1,11 @@
 <section class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
-			<h2>Parking</h2>
 			<div class="col-xs-5">
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<td>Notes:</td>
+							<td><h2>Parking</h2></td>
 							<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">+</button>
 								<div id="myModal" class="modal fade">
 									<div class="modal-dialog">
@@ -55,10 +54,6 @@
 							<td>Preview</td>
 						</tr>
 					</thead>
-					<tr *ngFor="let note of notes">
-						<td>{{ note.noteDateTime | date : 'medium' }}</td>
-						<td>{{ note.noteContent | slice:0:15 }}</td>
-					</tr>
 				</table>
 			</div>
 			<table class="table table-bordered table-hover table-parking">
