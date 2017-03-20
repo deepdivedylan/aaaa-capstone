@@ -27,11 +27,11 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-				loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?minimize=true' })
+				loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader?minimize=true' })
 			},
 			{
 				test: /\.ts$/,
-				loaders: ['awesome-typescript-loader', 'angular2-template-loader']
+				loaders: ['awesome-typescript-loader']
 			}
 		]
 	},
