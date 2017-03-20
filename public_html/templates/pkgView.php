@@ -1,6 +1,12 @@
 <section class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Permit</button>
+				<div id="myModal" class="modal fade">
+					<div class="modal-dialog">
+
+					</div>
+				</div>
 			<table class="table table-bordered table-hover table-parking">
 				<thead>
 					<tr>
