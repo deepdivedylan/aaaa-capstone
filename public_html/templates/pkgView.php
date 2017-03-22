@@ -9,6 +9,14 @@
 								<div class="form-group" [ngClass]="{ 'has-error': studentPermit.touched && studentPermit.invalid }">
 									<label for="studentPermitApplicationId">Application ID:</label>
 									<textarea name="studentPermitApplicationId" id="studentPermitApplicationId" class="form-control" required [(ngModel)]="studentPermit.studentPermitApplicationId" #studentPermitApplicationId="ngModel"></textarea>
+									<label for="studentPermitSwipeId">Swipe ID:</label>
+									<textarea name="studentPermitSwipeId" id="studentPermitSwipeId" class="form-control" required [(ngModel)]="studentPermit.studentPermitSwipeId" #studentPermitSwipeId="ngModel"></textarea>
+									<label for="studentPermitPlacardId">Placard ID:</label>
+									<textarea name="studentPermitPlacardId" id="studentPermitPlacardId" class="form-control" required [(ngModel)]="studentPermit.studentPermitPlacardId" #studentPermitPlacardId="ngModel"></textarea>
+									<label for="studentPermitCheckOutDate">Check Out Date:</label>
+									<textarea name="studentPermitCheckOutDate" id="studentPermitCheckOutDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckOutDate" #studentPermitCheckOutDate="ngModel"></textarea>
+									<label for="studentPermitCheckInDate">Check In Date:</label>
+									<textarea name="studentPermitCheckInDate" id="studentPermitCheckInDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckInDate" #studentPermitCheckInDate="ngModel"></textarea>
 								</div>
 							</div>
 						</form>
