@@ -115,7 +115,7 @@ try {
 		if(empty($requestObject->applicationEmail) === true) {
 			throw(new \InvalidArgumentException ("application Email is missing.", 405));
 		}
-
+		
 		// make sure application PhoneNumber is available (required field)
 		if(empty($requestObject->applicationPhoneNumber) === true) {
 			throw(new \InvalidArgumentException ("application PhoneNumber is missing.", 405));
