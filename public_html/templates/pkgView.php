@@ -1,12 +1,12 @@
 <section class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Permit</button>
+			<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Permit</button>
 				<div id="myModal" class="modal fade">
 					<div class="modal-dialog">
 						<form #pkgForm="ngForm" name="pkgView" id="pkgView" class="form-horizontal well" (ngSubmit)="createStudentPermit();" novalidate>
 							<div class="modal-body">
-								<div class="form-group" [ngClass]="{ 'has-error': studentPermit.touched && studentPermit.invalid }">
+								 <div class="form-group" [ngClass]="{ 'has-error': studentPermit.touched && studentPermit.invalid }"> --!>
 									<label for="studentPermitApplicationId">Application ID:</label>
 									<textarea name="studentPermitApplicationId" id="studentPermitApplicationId" class="form-control" required [(ngModel)]="studentPermit.studentPermitApplicationId" #studentPermitApplicationId="ngModel"></textarea>
 									<label for="studentPermitSwipeId">Swipe ID:</label>
@@ -14,16 +14,20 @@
 									<label for="studentPermitPlacardId">Placard ID:</label>
 									<textarea name="studentPermitPlacardId" id="studentPermitPlacardId" class="form-control" required [(ngModel)]="studentPermit.studentPermitPlacardId" #studentPermitPlacardId="ngModel"></textarea>
 									<label for="studentPermitCheckOutDate">Check Out Date:</label>
-									<textarea name="studentPermitCheckOutDate" id="studentPermitCheckOutDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckOutDate" #studentPermitCheckOutDate="ngModel"></textarea>
+									<input type="date" name="studentPermitCheckOutDate" id="studentPermitCheckOutDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckOutDate" #studentPermitCheckOutDate="ngModel">
 									<label for="studentPermitCheckInDate">Check In Date:</label>
-									<textarea name="studentPermitCheckInDate" id="studentPermitCheckInDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckInDate" #studentPermitCheckInDate="ngModel"></textarea>
+									<input type="date" name="studentPermitCheckInDate" id="studentPermitCheckInDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckInDate" #studentPermitCheckInDate="ngModel">
 
 								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<input type="submit" class="btn btn-info" value="Submit">
 							</div>
 						</form>
 
 					</div>
-				</div>
+				</div>-->
 			<table class="table table-bordered table-hover table-parking">
 				<thead>
 					<tr>

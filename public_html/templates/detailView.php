@@ -74,7 +74,6 @@
 									<!-- FORM -->
 									<form #noteForm="ngForm" name="detailView" id="detailView" class="form-horizontal well" (ngSubmit)="createNote();" novalidate>
 										<div class="modal-body">
-
 											<div class="form-group" [ngClass]="{ 'has-error': noteContent.touched && noteContent.invalid }">
 												<label for="noteContent">Content:</label>
 												<div class="input-group">
