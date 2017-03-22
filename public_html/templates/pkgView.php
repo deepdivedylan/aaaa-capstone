@@ -17,6 +17,7 @@
 									<textarea name="studentPermitCheckOutDate" id="studentPermitCheckOutDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckOutDate" #studentPermitCheckOutDate="ngModel"></textarea>
 									<label for="studentPermitCheckInDate">Check In Date:</label>
 									<textarea name="studentPermitCheckInDate" id="studentPermitCheckInDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckInDate" #studentPermitCheckInDate="ngModel"></textarea>
+
 								</div>
 							</div>
 						</form>
