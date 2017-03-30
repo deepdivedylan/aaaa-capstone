@@ -1,12 +1,12 @@
 <section class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
-			<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Permit</button>
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Permit</button>
 				<div id="myModal" class="modal fade">
 					<div class="modal-dialog">
 						<form #pkgForm="ngForm" name="pkgView" id="pkgView" class="form-horizontal well" (ngSubmit)="createStudentPermit();" novalidate>
 							<div class="modal-body">
-								 <div class="form-group" [ngClass]="{ 'has-error': studentPermit.touched && studentPermit.invalid }"> --!>
+								 <div class="form-group" [ngClass]="{ 'has-error': studentPermit.touched && studentPermit.invalid }">
 									<label for="studentPermitApplicationId">Application ID:</label>
 									<textarea name="studentPermitApplicationId" id="studentPermitApplicationId" class="form-control" required [(ngModel)]="studentPermit.studentPermitApplicationId" #studentPermitApplicationId="ngModel"></textarea>
 									<label for="studentPermitSwipeId">Swipe ID:</label>
@@ -27,7 +27,7 @@
 						</form>
 
 					</div>
-				</div>-->
+				</div>
 			<table class="table table-bordered table-hover table-parking">
 				<thead>
 					<tr>

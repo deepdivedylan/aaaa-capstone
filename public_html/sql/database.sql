@@ -15,7 +15,7 @@ CREATE TABLE application(
 	applicationId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	applicationFirstName VARCHAR(40) NOT NULL,
 	applicationLastName VARCHAR(40) NOT NULL,
-	applicationEmail VARCHAR(100) NOT NULL UNIQUE,
+	applicationEmail VARCHAR(100) NOT NULL,
 	applicationPhoneNumber VARCHAR(30) NOT NULL,
 	applicationSource VARCHAR(200) NOT NULL,
 	applicationAboutYou VARCHAR(2000) NOT NULL,

@@ -15,9 +15,9 @@ $pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
 // create application object from data decoded from post request and insert it into databse
 $newApp = new Application(
 	null,
-	$decodeContent["46813104"]["first"], //first name
+	"matt", //first name
 	$decodeContent["46813104"]["last"],//last name
-	$decodeContent["46813105"], //email
+	"iamemailyes@email.com", //email
 	$decodeContent["46813106"],//phonenumber
 	$decodeContent["46813107"],//source
 	$decodeContent["46813110"],//about you
@@ -32,14 +32,10 @@ $newApp = new Application(
 	//$decodeContent["Campaign Source"]
 );
 
-$applicationEmail = $decodeContent["46813105"];
 
-$emailExists = Application::getApplicationByApplicationEmail($pdo, $applicationEmail);
-if(!empty($emailExists)) {
-	die;
-} else {
-	$newApp->insert($pdo);
-}
+
+	//$newApp->insert($pdo);
+
 
 // create applicationCohort object(s) to associate this application with the cohort(s) the user selected and insert them into the database
 
