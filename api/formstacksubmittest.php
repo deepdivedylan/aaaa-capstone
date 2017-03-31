@@ -20,6 +20,7 @@ fclose($fd);
 
 $pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
 
+
 $newApp = new Application(
 	null,
 	$decodeContent["46813104"]["first"], //first name
@@ -39,7 +40,16 @@ $newApp = new Application(
 //$decodeContent["Campaign Source"]
 );
 
-$newApp->insert($pdo);
+$newEmail = $decodeContent["46813105"];
+if(!empty($newEmail)) {
+
+	$existingEmail = Application::getApplicationByApplicationEmail($pdo, $newEmail);
+	if ($existingEmail !== null) {
+		$newApp->insert($pdo);
+	}
+}
+
+
 
 if($decodeContent["46813108"] !== null) {
 	if(is_array($decodeContent["46813108"])){
