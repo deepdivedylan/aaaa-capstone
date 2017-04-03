@@ -41,13 +41,28 @@ $newApp = new Application(
 );
 
 $newEmail = $decodeContent["46813105"];
+
 if(!empty($newEmail)) {
 
-	$existingEmail = Application::getApplicationByApplicationEmail($pdo, $newEmail);
-	if ($existingEmail !== null) {
+	$existingApp = Application::getApplicationByApplicationEmail($pdo, $newEmail);
+	if ($existingApp !== null) {
+
+		$query = "UPDATE application SET applicationFirstName = :firstName WHERE applicationEmail = :email";
+		$statement = $pdo->prepare($query);
+		$params = [
+			"email" => $newEmail,
+			"firstName" => $decodeContent["46813104"]["first"],
+			"lastName" => $decodeContent["46813104"]["last"],
+			"phone" => $decodeContent["46813106"],
+			"source" => $decodeContent["46813107"]
+			];
+		$statement->execute($params);
+	} else {
 		$newApp->insert($pdo);
 	}
 }
+
+
 
 
 
