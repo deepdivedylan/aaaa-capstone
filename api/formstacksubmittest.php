@@ -45,16 +45,23 @@ $newEmail = $decodeContent["46813105"];
 if(!empty($newEmail)) {
 
 	$existingApp = Application::getApplicationByApplicationEmail($pdo, $newEmail);
+	$existingAbout = $existingApp->getApplicationAboutYou();
+	$existingGoals = $existingApp->getApplicationHopeToAccomplish();
+	$existingExperience = $existingApp->getApplicationExperience();
+	$existingDateTime = $existingApp->getApplicationDateTime();
 	if ($existingApp !== null) {
 
-		$query = "UPDATE application SET applicationFirstName = :firstName WHERE applicationEmail = :email";
+		$query = "UPDATE application SET applicationFirstName = :firstName, applicationLastName = :lastName, applicationPhoneNumber = :phone, applicationSource = :source, applicationAboutYou = :about, applicationHopeToAccomplish = :goals, applicationExperience = :experience WHERE applicationEmail = :email";
 		$statement = $pdo->prepare($query);
 		$params = [
 			"email" => $newEmail,
 			"firstName" => $decodeContent["46813104"]["first"],
 			"lastName" => $decodeContent["46813104"]["last"],
 			"phone" => $decodeContent["46813106"],
-			"source" => $decodeContent["46813107"]
+			"source" => $decodeContent["46813107"],
+			"about" => $decodeContent["46813110"] ."\r\n ********* Previous entry on********* \r\n". $existingAbout,
+			"goals" => $decodeContent["46813111"] ."\r\n ********* Previous entry on********* \r\n" . $existingGoals,
+			"experience" => $decodeContent["46813112"] ."\r\n ********* Previous entry on********* \r\n". $existingExperience
 			];
 		$statement->execute($params);
 	} else {
