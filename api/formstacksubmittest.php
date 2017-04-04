@@ -2,11 +2,13 @@
 
 
 namespace Edu\Cnm\DdcAaaa;
-use Edu\Cnm\DdcAaaa\{ Application };
+use Edu\Cnm\DdcAaaa\Application ;
 require_once(dirname(__DIR__) . "/public_html/php/classes/autoload.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 $requestContent = file_get_contents("php://input");
 $decodeContent = json_decode($requestContent, true);
+
+var_dump($decodeContent);
 
 
 $decodeContentString = var_export($decodeContent, true);
@@ -42,34 +44,59 @@ $newApp = new Application(
 
 $newEmail = $decodeContent["46813105"];
 
+//checking the user's email
 if(!empty($newEmail)) {
 
 	$existingApp = Application::getApplicationByApplicationEmail($pdo, $newEmail);
-	$existingAbout = $existingApp->getApplicationAboutYou();
-	$existingGoals = $existingApp->getApplicationHopeToAccomplish();
-	$existingExperience = $existingApp->getApplicationExperience();
-	$existingDateTime = $existingApp->getApplicationDateTime();
+
+	//checking to see if the user is already in the database
 	if ($existingApp !== null) {
 
-		$query = "UPDATE application SET applicationFirstName = :firstName, applicationLastName = :lastName, applicationPhoneNumber = :phone, applicationSource = :source, applicationAboutYou = :about, applicationHopeToAccomplish = :goals, applicationExperience = :experience WHERE applicationEmail = :email";
+		//retrieving existing information about applicants from the db
+		$existingAbout = $existingApp->getApplicationAboutYou();
+		$existingGoals = $existingApp->getApplicationHopeToAccomplish();
+		$existingExperience = $existingApp->getApplicationExperience();
+		$existingDateTime = $existingApp->getApplicationDateTime()->format("Y-m-d H:i:s");
+		$newDateTime = new \DateTime();
+
+		//update query for updating the application table when a user submits multiple applications
+		$query = "UPDATE application SET applicationFirstName = :firstName, applicationLastName = :lastName, applicationPhoneNumber = :phone, applicationSource = :source, applicationAboutYou = :about, applicationHopeToAccomplish = :goals, applicationExperience = :experience, applicationDateTime = :dateTime WHERE applicationEmail = :email";
 		$statement = $pdo->prepare($query);
+
+	   //Checks to see if the user changed anything before updating the database
+		if ($existingAbout === $decodeContent["46813110"] || empty($decodeContent["46813110"])) {
+			$about = $existingAbout;
+		}else {
+			$about = $decodeContent["46813110"] ."\r\n ********* Previous entry on $existingDateTime ********* \r\n". $existingAbout;
+		}
+		if ($existingGoals === $decodeContent["46813111"] || empty($decodeContent["46813111"])) {
+			$goals = $existingGoals;
+		}else {
+			$goals = $decodeContent["46813111"] ."\r\n ********* Previous entry on $existingDateTime ********* \r\n". $existingGoals;
+		}
+		if ($existingExperience === $decodeContent["46813112"] || empty($decodeContent["46813112"])) {
+			$experience = $existingExperience;
+		}else {
+			$experience = $decodeContent["46813112"] ."\r\n ********* Previous entry on $existingDateTime ********* \r\n". $existingExperience;
+		}
+
+		//parameters for the update query
 		$params = [
 			"email" => $newEmail,
 			"firstName" => $decodeContent["46813104"]["first"],
 			"lastName" => $decodeContent["46813104"]["last"],
 			"phone" => $decodeContent["46813106"],
 			"source" => $decodeContent["46813107"],
-			"about" => $decodeContent["46813110"] ."\r\n ********* Previous entry on********* \r\n". $existingAbout,
-			"goals" => $decodeContent["46813111"] ."\r\n ********* Previous entry on********* \r\n" . $existingGoals,
-			"experience" => $decodeContent["46813112"] ."\r\n ********* Previous entry on********* \r\n". $existingExperience
+			"about" => $about,
+			"goals" => $goals,
+			"experience" => $experience,
+			"dateTime" => $newDateTime->format("Y-m-d H:i:s")
 			];
 		$statement->execute($params);
 	} else {
 		$newApp->insert($pdo);
 	}
 }
-
-
 
 
 

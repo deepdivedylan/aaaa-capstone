@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS note;
-# DROP TABLE IF EXISTS prospectCohort;
+DROP TABLE IF EXISTS prospectCohort;
 DROP TABLE IF EXISTS studentPermit;
 DROP TABLE IF EXISTS applicationCohort;
 DROP TABLE IF EXISTS swipe;
@@ -21,7 +21,7 @@ CREATE TABLE application(
 	applicationAboutYou VARCHAR(2000) NOT NULL,
 	applicationHopeToAccomplish VARCHAR(2000) NOT NULL,
 	applicationExperience VARCHAR(2000) NOT NULL,
-	applicationDateTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	applicationDateTime TIMESTAMP NOT NULL,
 	applicationUtmCampaign VARCHAR(500) NOT NULL,
 	applicationUtmMedium VARCHAR(500) NOT NULL,
 	applicationUtmSource VARCHAR(500) NOT NULL,
