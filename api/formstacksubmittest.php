@@ -56,6 +56,7 @@ if(!empty($newEmail)) {
 		$existingAbout = $existingApp->getApplicationAboutYou();
 		$existingGoals = $existingApp->getApplicationHopeToAccomplish();
 		$existingExperience = $existingApp->getApplicationExperience();
+		$existingSource = $existingApp->getApplicationSource();
 		$existingDateTime = $existingApp->getApplicationDateTime()->format("Y-m-d H:i:s");
 		$newDateTime = new \DateTime();
 
@@ -67,17 +68,22 @@ if(!empty($newEmail)) {
 		if ($existingAbout === $decodeContent["46813110"] || empty($decodeContent["46813110"])) {
 			$about = $existingAbout;
 		}else {
-			$about = $decodeContent["46813110"] ."\r\n ********* Previous entry on $existingDateTime ********* \r\n". $existingAbout;
+			$about = $decodeContent["46813110"] ." ********* Previous entry: $existingDateTime ********* ". $existingAbout;
 		}
 		if ($existingGoals === $decodeContent["46813111"] || empty($decodeContent["46813111"])) {
 			$goals = $existingGoals;
 		}else {
-			$goals = $decodeContent["46813111"] ."\r\n ********* Previous entry on $existingDateTime ********* \r\n". $existingGoals;
+			$goals = $decodeContent["46813111"] ." ********* Previous entry: $existingDateTime ********* ". $existingGoals;
 		}
 		if ($existingExperience === $decodeContent["46813112"] || empty($decodeContent["46813112"])) {
 			$experience = $existingExperience;
 		}else {
-			$experience = $decodeContent["46813112"] ."\r\n ********* Previous entry on $existingDateTime ********* \r\n". $existingExperience;
+			$experience = $decodeContent["46813112"] ." ********* Previous entry: $existingDateTime ********* ". $existingExperience;
+		}
+		if ($existingSource === $decodeContent["46813107"] || empty($decodeContent["46813107"])) {
+			$source = $existingSource;
+		}else {
+			$source = $decodeContent["46813107"] ." ********* Previous entry: $existingDateTime ********* ". $existingSource;
 		}
 
 		//parameters for the update query
@@ -86,7 +92,7 @@ if(!empty($newEmail)) {
 			"firstName" => $decodeContent["46813104"]["first"],
 			"lastName" => $decodeContent["46813104"]["last"],
 			"phone" => $decodeContent["46813106"],
-			"source" => $decodeContent["46813107"],
+			"source" => $source,
 			"about" => $about,
 			"goals" => $goals,
 			"experience" => $experience,
@@ -99,30 +105,37 @@ if(!empty($newEmail)) {
 }
 
 
+if ($existingApp !== null) {
 
-if($decodeContent["46813108"] !== null) {
-	if(is_array($decodeContent["46813108"])){
-		foreach($decodeContent["46813108"] as &$cohortId){
-			$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $cohortId);
-			$fd = fopen("/tmp/posttest.txt", "w");
-			fwrite($fd, var_export($newAppCohort));
-			fclose($fd);
+	//update query for updating the application table when a user submits multiple applications
+	$query = "UPDATE application SET applicationFirstName = :firstName, applicationLastName = :lastName, applicationPhoneNumber = :phone, applicationSource = :source, applicationAboutYou = :about, applicationHopeToAccomplish = :goals, applicationExperience = :experience, applicationDateTime = :dateTime WHERE applicationEmail = :email";
+	$statement = $pdo->prepare($query);
+
+}else {
+	if($decodeContent["46813108"] !== null) {
+		if(is_array($decodeContent["46813108"])) {
+			foreach($decodeContent["46813108"] as &$cohortId) {
+				$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $cohortId);
+				$fd = fopen("/tmp/posttest.txt", "w");
+				fwrite($fd, var_export($newAppCohort));
+				fclose($fd);
+				$newAppCohort->insert($pdo);
+			}
+		} else {
+			$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813108"]);
 			$newAppCohort->insert($pdo);
 		}
-	}else{
-		$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813108"]);
-		$newAppCohort->insert($pdo);
 	}
-}
 
-if($decodeContent["46813109"] !== null){
-	if(is_array($decodeContent["46813109"])){
-		foreach($decodeContent["46813109"] as &$cohortId){
-			$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $cohortId);
+	if($decodeContent["46813109"] !== null) {
+		if(is_array($decodeContent["46813109"])) {
+			foreach($decodeContent["46813109"] as &$cohortId) {
+				$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $cohortId);
+				$newAppCohort->insert($pdo);
+			}
+		} else {
+			$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813109"]);
 			$newAppCohort->insert($pdo);
 		}
-	}else{
-		$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813109"]);
-		$newAppCohort->insert($pdo);
 	}
 }
