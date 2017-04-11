@@ -53,6 +53,7 @@ if(!empty($newEmail)) {
 	if ($existingApp !== null) {
 
 		//retrieving existing information about applicants from the db
+		$existingAppId = $existingApp->getApplicationId();
 		$existingAbout = $existingApp->getApplicationAboutYou();
 		$existingGoals = $existingApp->getApplicationHopeToAccomplish();
 		$existingExperience = $existingApp->getApplicationExperience();
@@ -107,9 +108,37 @@ if(!empty($newEmail)) {
 
 if ($existingApp !== null) {
 
-	//update query for updating the application table when a user submits multiple applications
-	$query = "UPDATE application SET applicationFirstName = :firstName, applicationLastName = :lastName, applicationPhoneNumber = :phone, applicationSource = :source, applicationAboutYou = :about, applicationHopeToAccomplish = :goals, applicationExperience = :experience, applicationDateTime = :dateTime WHERE applicationEmail = :email";
-	$statement = $pdo->prepare($query);
+	//probably an array....
+	$existingCohortAppArray = ApplicationCohort::getApplicationCohortsByApplicationId($pdo, $existingAppId);
+
+
+
+	$cohortIdThree =;
+
+	if ($decodeContent["46813108"] !== null) {
+
+		if (count($decodeContent["46813108"]) > 1) {
+			$cohortIdOne = $decodeContent["46813108"][0];
+			$cohortIdTwo = $decodeContent["46813108"][1];
+			$cohortIdThree = $decodeContent["46813109"];
+		} else {
+			$cohortIdOne = $decodeContent["46813108"][0];
+			$cohortIdTwo = null;
+			$cohortIdThree = $decodeContent["46813109"];
+		}
+
+
+		foreach($existingCohortAppArray as $existingCohortApp) {
+
+			$existingCohortAppId = $existingCohortApp->getApplicationCohortApplicationId();
+			$existingCohortId = $existingCohortApp->getApplicationCohortCohortId();
+
+			if($newApp->getApplicationId() !== $existingCohortAppId && $existingCohortId !==) {
+
+			}
+
+		}
+	}
 
 }else {
 	if($decodeContent["46813108"] !== null) {
