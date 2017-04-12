@@ -105,19 +105,17 @@ if(!empty($newEmail)) {
 	}
 }
 
-
+//check for existing applicant
 if ($existingApp !== null) {
 
-	//probably an array....
+	//get cohorts applied for by app id. probably an array....
 	$existingCohortAppArray = ApplicationCohort::getApplicationCohortsByApplicationId($pdo, $existingAppId);
 
-
-
-	$cohortIdThree =;
-
+	//if the user checked a cohort
 	if ($decodeContent["46813108"] !== null) {
 
-		if (count($decodeContent["46813108"]) > 1) {
+		//this is returned as an array, assigns variable based on how many items in the array.
+		if(count($decodeContent["46813108"]) > 1) {
 			$cohortIdOne = $decodeContent["46813108"][0];
 			$cohortIdTwo = $decodeContent["46813108"][1];
 			$cohortIdThree = $decodeContent["46813109"];
@@ -127,19 +125,20 @@ if ($existingApp !== null) {
 			$cohortIdThree = $decodeContent["46813109"];
 		}
 
-
+		//loop through array of existing cohort applications for a given application id
 		foreach($existingCohortAppArray as $existingCohortApp) {
 
-			$existingCohortAppId = $existingCohortApp->getApplicationCohortApplicationId();
 			$existingCohortId = $existingCohortApp->getApplicationCohortCohortId();
 
-			if($newApp->getApplicationId() !== $existingCohortAppId && $existingCohortId !==) {
-
+			if ($cohortIdTwo !== null && $cohortIdTwo !== $existingCohortId) {
+				$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $cohortIdTwo);
+				$fd = fopen("/tmp/posttest.txt", "w");
+				fwrite($fd, var_export($newAppCohort));
+				fclose($fd);
+				$newAppCohort->insert($pdo);
 			}
-
 		}
 	}
-
 }else {
 	if($decodeContent["46813108"] !== null) {
 		if(is_array($decodeContent["46813108"])) {
