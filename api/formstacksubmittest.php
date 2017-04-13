@@ -115,7 +115,7 @@ if ($existingApp !== null) {
 	if ($decodeContent["46813108"] !== null) {
 
 		//this is returned as an array, assigns variable based on how many items in the array.
-		if(count($decodeContent["46813108"]) > 1) {
+		/*if(count($decodeContent["46813108"]) > 1) {
 			$cohortIdOne = $decodeContent["46813108"][0];
 			$cohortIdTwo = $decodeContent["46813108"][1];
 			$cohortIdThree = $decodeContent["46813109"];
@@ -123,19 +123,43 @@ if ($existingApp !== null) {
 			$cohortIdOne = $decodeContent["46813108"][0];
 			$cohortIdTwo = null;
 			$cohortIdThree = $decodeContent["46813109"];
-		}
+		}*/
 
 		//loop through array of existing cohort applications for a given application id
 		foreach($existingCohortAppArray as $existingCohortApp) {
 
 			$existingCohortId = $existingCohortApp->getApplicationCohortCohortId();
-
-			if ($cohortIdTwo !== null && $cohortIdTwo !== $existingCohortId) {
-				$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $cohortIdTwo);
-				$fd = fopen("/tmp/posttest.txt", "w");
-				fwrite($fd, var_export($newAppCohort));
-				fclose($fd);
-				$newAppCohort->insert($pdo);
+			if(is_array($decodeContent["46813108"])) {
+				foreach($decodeContent["46813108"] as &$cohortId) {
+					if ($existingCohortId !== $cohortId) {
+						$updateAppCohort = new ApplicationCohort(null, $existingAppId, $cohortId);
+						$fd = fopen("/tmp/posttest.txt", "w");
+						fwrite($fd, var_export($updateAppCohort));
+						fclose($fd);
+						$updateAppCohort->insert($pdo);
+					}
+				}
+			} else {
+				if ($existingCohortId !== $decodeContent["46813108"]) {
+					$updateAppCohort = new ApplicationCohort(null, $existingAppId, $decodeContent["46813108"]);
+					$updateAppCohort->insert($pdo);
+				}
+			}
+			if(is_array($decodeContent["46813109"])) {
+				foreach($decodeContent["46813109"] as &$cohortId) {
+					if ($existingCohortId !== $cohortId) {
+						$updateAppCohort = new ApplicationCohort(null, $existingAppId, $cohortId);
+						$fd = fopen("/tmp/posttest.txt", "w");
+						fwrite($fd, var_export($updateAppCohort));
+						fclose($fd);
+						$updateAppCohort->insert($pdo);
+					}
+				}
+			} else {
+				if ($existingCohortId !== $decodeContent["46813109"]) {
+					$updateAppCohort = new ApplicationCohort(null, $existingAppId, $decodeContent["46813109"]);
+					$updateAppCohort->insert($pdo);
+				}
 			}
 		}
 	}//
