@@ -138,7 +138,7 @@ if ($existingApp !== null) {
 				$newAppCohort->insert($pdo);
 			}
 		}
-	}
+	}//
 }else {
 	if($decodeContent["46813108"] !== null) {
 		if(is_array($decodeContent["46813108"])) {
