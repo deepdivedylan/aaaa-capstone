@@ -3,56 +3,35 @@
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
-					<td>Applicant Details:</td>
+					<td>Prospect Details:</td>
 					<td></td>
 				</tr>
 			</thead>
 			<tr>
 				<td>First Name:</td>
-				<td>{{application.applicationFirstName}}</td>
+				<td>{{prospect.prospectFirstName}}</td>
 			</tr>
 			<tr>
 				<td>Last Name:</td>
-				<td>{{application.applicationLastName}}</td>
+				<td>{{prospect.prospectLastName}}</td>
 			</tr>
 			<tr>
 				<td>Cohorts:</td>
 				<td>
 					<ul class="list-unstyled">
-						<li *ngFor="let applicationCohort of applicationCohorts">
-							{{ applicationCohort.info[1].cohortName }}
+						<li *ngFor="let prospectCohort of prospectCohorts">
+							{{ prospectCohort.info[1].cohortName }}
 						</li>
 					</ul>
 				</td>
 			</tr>
 			<tr>
 				<td>Email:</td>
-				<td>{{application.applicationEmail}}</td>
+				<td>{{prospect.prospectEmail}}</td>
 			</tr>
 			<tr>
 				<td>Phone Number:</td>
-				<td>{{application.applicationPhoneNumber}}</td>
-			</tr>
-			<tr>
-				<td>Where did you hear about DDC from?</td>
-				<td>{{application.applicationSource}}</td>
-			</tr>
-			<tr>
-				<td>About You:</td>
-				<td>{{application.applicationAboutYou}}</td>
-			</tr>
-			<tr>
-				<td>Hope To Accomplish:</td>
-				<td>{{application.applicationHopeToAccomplish}}</td>
-			</tr>
-			<tr>
-				<td>Previous Experience:</td>
-				<td>{{application.applicationExperience}}</td>
-			</tr>
-			<tr>
-				<td>Date Submitted:</td>
-				<!--				<td>{{ application.applicationDateTime }}</td>-->
-				<td>{{ testDate | date : 'medium' }}</td>
+				<td>{{prospect.prospectPhoneNumber}}</td>
 			</tr>
 		</table>
 	</div>

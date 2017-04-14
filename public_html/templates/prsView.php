@@ -12,7 +12,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr *ngFor="let prospectCohort of prospectCohorts">
+					<tr *ngFor="let prospectCohort of prospectCohorts" (click)="switchProspect(prospectCohort.info[0]);">
 						<td>{{ prospectCohort.info[0].prospectFirstName }}</td>
 						<td>{{ prospectCohort.info[0].prospectLastName }}</td>
 						<td>{{ prospectCohort.info[0].prospectEmail }}</td>

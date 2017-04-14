@@ -47,5 +47,9 @@ export class PrsViewComponent implements OnInit{
 		this.cohortService.getAllCohorts()
 			.subscribe(cohorts => this.cohorts = cohorts);
 	}
+
+	switchProspect(prospect: Prospect) : void {
+		this.router.navigate(["/prsDetailView/", prospect.prospectId]);
+	}
 	
 }

@@ -2,11 +2,11 @@ import {Component, OnInit, ViewChild} from "@angular/core";
 import {Router, ActivatedRoute, Params} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {ProspectService} from "../services/prospect-service";
-import {ProspectCohortService} from "../services/ProspectCohort-service";
+import {ProspectCohortService} from "../services/prospectCohort-service";
 import {Note} from "../classes/note";
 import {NoteService} from "../services/note-service";
 import {Prospect} from "../classes/prospect";
-import {ProspectCohort} from "../classes/ProspectCohort";
+import {ProspectCohort} from "../classes/prospectCohort";
 import {NoteType} from "../classes/noteType";
 import {NoteTypeService} from "../services/noteType-service";
 import {Status} from "../classes/status";
@@ -42,19 +42,20 @@ export class PrsDetailViewComponent implements OnInit{
 		this.reloadNoteTypes();
 	}
 
+
 	reloadProspect()	 : void {
 		this.activatedRoute.params
-			.switchMap((params : Params) => this.prospectService.getProspectByPospectId(+params["prospectId"]))
-			.subscribe(application => {
-				this.application = application;
-				this.testDate = application.applicationDateTime;
-				this.note.noteApplicationId = this.application.applicationId;
+			.switchMap((params : Params) => this.prospectService.getProspectByProspectId(+params["prospectId"]))
+			.subscribe(prospect => {
+				this.prospect = prospect;
+				this.note.noteProspectId = this.prospect.prospectId;
 
-				this.noteService.getNotesByNoteApplicationId(this.application.applicationId)
+				console.log(this.prospect);
+				this.noteService.getNotesByNoteApplicationId(this.prospect.prospectId)
 					.subscribe(notes => this.notes = notes);
 
-				this.applicationCohortService.getApplicationCohortsByApplicationId(this.application.applicationId)
-					.subscribe(applicationCohorts => this.applicationCohorts = applicationCohorts);
+				this.prospectCohortService.getProspectCohortsByProspectId(this.prospect.prospectId)
+					.subscribe(prospectCohorts => this.prospectCohorts = prospectCohorts);
 
 			});
 	}
@@ -67,8 +68,8 @@ export class PrsDetailViewComponent implements OnInit{
 			.subscribe(status => {
 				this.status = status;
 				if(status.apiStatus === 200) {
-					this.reloadApplication();
-					this.detailView.reset();
+					this.reloadProspect();
+					this.prsDetailView.reset();
 				}
 			});
 	}
