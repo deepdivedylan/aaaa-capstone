@@ -47,16 +47,17 @@ export class PrsDetailViewComponent implements OnInit{
 		this.activatedRoute.params
 			.switchMap((params : Params) => this.prospectService.getProspectByProspectId(+params["prospectId"]))
 			.subscribe(prospect => {
-				this.prospect = prospect;
+				this.prospect = prospect[0];
 				this.note.noteProspectId = this.prospect.prospectId;
 
-				console.log(this.prospect);
-				this.noteService.getNotesByNoteApplicationId(this.prospect.prospectId)
+
+				this.noteService.getNotesByNoteProspectId(this.prospect["prospectId"])
 					.subscribe(notes => this.notes = notes);
 
-				this.prospectCohortService.getProspectCohortsByProspectId(this.prospect.prospectId)
-					.subscribe(prospectCohorts => this.prospectCohorts = prospectCohorts);
 
+				this.prospectCohortService.getProspectCohortsByProspectId(this.prospect["prospectId"])
+					.subscribe(prospectCohorts => this.prospectCohorts = prospectCohorts);
+				console.log(this.prospectCohorts);
 			});
 	}
 	reloadNoteTypes() : void {
