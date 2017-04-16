@@ -152,6 +152,7 @@ if ($existingApp !== null) {
 			}
 		}
 	}
+	//this is a change
 	//if the second group of cohort check boxes is not null
 	if ($decodeContent["46813109"] !== null) {
 
