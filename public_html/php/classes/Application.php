@@ -338,7 +338,7 @@ class Application implements \JsonSerializable {
 			throw (new \InvalidArgumentException("application About You is empty or secure"));
 		}
 		//verify source will fit in the database
-		if(strlen($newApplicationAboutYou) > 1000){
+		if(strlen($newApplicationAboutYou) > 10000){
 			throw (new \RangeException("application About You is too large"));
 		}
 //store the Application About You

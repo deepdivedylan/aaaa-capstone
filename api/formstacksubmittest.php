@@ -9,8 +9,9 @@ $requestContent = file_get_contents("php://input");
 $decodeContent = json_decode($requestContent, true);
 
 var_dump($decodeContent);
-
-
+if ($decodeContent === null) {
+	echo "fuuuuuuuuuuuuuuuuuuuccccccckkkkkkkkkkkk";
+}
 $decodeContentString = var_export($decodeContent, true);
 
 $fd = fopen("/tmp/posttest2.txt", "w");
@@ -60,6 +61,7 @@ if(!empty($newEmail)) {
 		$existingSource = $existingApp->getApplicationSource();
 		$existingDateTime = $existingApp->getApplicationDateTime()->format("Y-m-d H:i:s");
 		$newDateTime = new \DateTime();
+
 
 		//update query for updating the application table when a user submits multiple applications
 		$query = "UPDATE application SET applicationFirstName = :firstName, applicationLastName = :lastName, applicationPhoneNumber = :phone, applicationSource = :source, applicationAboutYou = :about, applicationHopeToAccomplish = :goals, applicationExperience = :experience, applicationDateTime = :dateTime WHERE applicationEmail = :email";
@@ -111,47 +113,85 @@ if ($existingApp !== null) {
 	//get cohorts applied for by app id. probably an array....
 	$existingCohortAppArray = ApplicationCohort::getApplicationCohortsByApplicationId($pdo, $existingAppId);
 
-	//if the user checked a cohort
+	//if the user checked a cohort $decodeContent["46813108"] = first group of check boxes
 	if ($decodeContent["46813108"] !== null) {
+
+		//array that will contain previously submitted cohort ids
+		$existingCohortIdArray = [];
+		//array for freshly submitted cohort ids
+		$newCohortIdArray = [];
 
 		//loop through array of existing cohort applications for a given application id
 		foreach($existingCohortAppArray as $existingCohortApp) {
 
+			//get cohort ids and push them into an array
 			$existingCohortId = $existingCohortApp->getApplicationCohortCohortId();
-			if(is_array($decodeContent["46813108"])) {
-				foreach($decodeContent["46813108"] as &$cohortId) {
-					if ($existingCohortId !== $cohortId) {
-						$updateAppCohort = new ApplicationCohort(null, $existingAppId, $cohortId);
-						$fd = fopen("/tmp/posttest.txt", "w");
-						fwrite($fd, var_export($updateAppCohort));
-						fclose($fd);
-						$updateAppCohort->insert($pdo);
-					}
-				}
-			} else {
-				if ($existingCohortId !== $decodeContent["46813108"]) {
-					$updateAppCohort = new ApplicationCohort(null, $existingAppId, $decodeContent["46813108"]);
-					$updateAppCohort->insert($pdo);
-				}
-			}
-			if(is_array($decodeContent["46813109"])) {
-				foreach($decodeContent["46813109"] as &$cohortId) {
-					if ($existingCohortId !== $cohortId) {
-						$updateAppCohort = new ApplicationCohort(null, $existingAppId, $cohortId);
-						$fd = fopen("/tmp/posttest.txt", "w");
-						fwrite($fd, var_export($updateAppCohort));
-						fclose($fd);
-						$updateAppCohort->insert($pdo);
-					}
-				}
-			} else {
-				if ($existingCohortId !== $decodeContent["46813109"]) {
-					$updateAppCohort = new ApplicationCohort(null, $existingAppId, $decodeContent["46813109"]);
-					$updateAppCohort->insert($pdo);
-				}
+			array_push($existingCohortIdArray, $existingCohortId);
+		}
+		//if the user checked more than one cohort box
+		if(is_array($decodeContent["46813108"])) {
+			//loop through new cohort ids and push them to an array
+			foreach($decodeContent["46813108"] as &$cohortId) {
+				array_push($newCohortIdArray, $cohortId);
 			}
 		}
-	}//
+		else {
+			//push new cohort id to an array
+			array_push($newCohortIdArray, $decodeContent["46813108"]);
+		}
+		//compare array of new id's vs array of old ids
+		$insertIdArray = array_diff($newCohortIdArray, $existingCohortIdArray);
+		if (count($insertIdArray) > 0) {
+			//insert new ids into the db
+			foreach($insertIdArray as $value) {
+				$updateAppCohort = new ApplicationCohort(null, $existingAppId, $value);
+				$fd = fopen("/tmp/posttest.txt", "w");
+				fwrite($fd, var_export($updateAppCohort));
+				fclose($fd);
+				$updateAppCohort->insert($pdo);
+			}
+		}
+	}
+	//if the second group of cohort check boxes is not null
+	if ($decodeContent["46813109"] !== null) {
+
+		//array that will contain previously submitted cohort ids
+		$existingCohortIdArray = [];
+		//array for freshly submitted cohort ids
+		$newCohortIdArray = [];
+
+		//loop through array of existing cohort applications for a given application id
+		foreach($existingCohortAppArray as $existingCohortApp) {
+
+			//get cohort ids and push them into an array
+			$existingCohortId = $existingCohortApp->getApplicationCohortCohortId();
+			array_push($existingCohortIdArray, $existingCohortId);
+		}
+		//if the user checked more than one cohort box
+		if(is_array($decodeContent["46813109"])) {
+			//loop through new cohort ids and push them to an array
+			foreach($decodeContent["46813109"] as &$cohortId) {
+				array_push($newCohortIdArray, $cohortId);
+			}
+		}
+		else {
+			//push new cohort id to an array
+			array_push($newCohortIdArray, $decodeContent["46813109"]);
+		}
+		//compare array of new id's vs array of old ids
+		$insertIdArray = array_diff($newCohortIdArray, $existingCohortIdArray);
+		if (count($insertIdArray) > 0) {
+			//insert new ids into the db
+			foreach($insertIdArray as $value) {
+				$updateAppCohort = new ApplicationCohort(null, $existingAppId, $value);
+				$fd = fopen("/tmp/posttest.txt", "w");
+				fwrite($fd, var_export($updateAppCohort));
+				fclose($fd);
+				$updateAppCohort->insert($pdo);
+			}
+		}
+	}
+
 }else {
 	if($decodeContent["46813108"] !== null) {
 		if(is_array($decodeContent["46813108"])) {
