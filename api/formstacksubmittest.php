@@ -8,10 +8,7 @@ require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 $requestContent = file_get_contents("php://input");
 $decodeContent = json_decode($requestContent, true);
 
-var_dump($decodeContent);
-if ($decodeContent === null) {
-	echo "fuuuuuuuuuuuuuuuuuuuccccccckkkkkkkkkkkk";
-}
+
 $decodeContentString = var_export($decodeContent, true);
 
 $fd = fopen("/tmp/posttest2.txt", "w");
