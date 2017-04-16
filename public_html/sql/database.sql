@@ -148,3 +148,15 @@ CREATE TABLE note(
 	FOREIGN KEY(noteNoteTypeId) REFERENCES noteType(noteTypeId),
 	FOREIGN KEY(noteBridgeStaffId) REFERENCES bridge (bridgeStaffId)
 );
+
+
+INSERT INTO noteType (noteTypeName) VALUES ("New Applicant");
+INSERT INTO noteType (noteTypeName) VALUES ("Contacted");
+INSERT INTO noteType (noteTypeName) VALUES ("Tentative");
+INSERT INTO noteType (noteTypeName) VALUES ("Seriously Interested");
+INSERT INTO noteType (noteTypeName) VALUES ("Lost Interest");
+INSERT INTO noteType (noteTypeName) VALUES ("Sent Registration Form");
+INSERT INTO noteType (noteTypeName) VALUES ("Paid Deposit Started Prework");
+INSERT INTO noteType (noteTypeName) VALUES ("Current Student");
+INSERT INTO noteType (noteTypeName) VALUES ("Incomplete Student");
+INSERT INTO noteType (noteTypeName) VALUES ("Alumni");
