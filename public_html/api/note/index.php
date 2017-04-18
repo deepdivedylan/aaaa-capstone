@@ -45,6 +45,7 @@ try {
 
 	$startDate = filter_input(INPUT_GET, "startDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$endDate = filter_input(INPUT_GET, "endDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$bridgeId = "010039079";
 
 
 	// handle GET request
@@ -120,7 +121,7 @@ try {
 				$requestObject->noteProspectId,
 				new \DateTime(),
 				//$_SESSION["adUser"]["studentId"
-					'111222333'
+				$bridgeId
 		);
 			$note->insert($pdo);
 
