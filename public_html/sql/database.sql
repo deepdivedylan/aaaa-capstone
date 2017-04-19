@@ -160,3 +160,5 @@ INSERT INTO noteType (noteTypeName) VALUES ("Paid Deposit Started Prework");
 INSERT INTO noteType (noteTypeName) VALUES ("Current Student");
 INSERT INTO noteType (noteTypeName) VALUES ("Incomplete Student");
 INSERT INTO noteType (noteTypeName) VALUES ("Alumni");
+
+INSERT INTO bridge SET bridgeStaffId = "010039079", bridgeName = "matt",bridgeUserName = "Karstagg";
