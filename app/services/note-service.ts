@@ -32,7 +32,7 @@ export class NoteService extends BaseService {
 	}
 
 	getNotesByNoteProspectId(noteProspectId: number) : Observable<Note[]> {
-		return(this.http.get(this.noteUrl + noteProspectId)
+		return(this.http.get(this.noteUrl + "?noteProspectId=" + noteProspectId)
 			.map(this.extractData)
 			.catch(this.handleError));
 	}

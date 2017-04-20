@@ -51,24 +51,23 @@ export class PrsDetailViewComponent implements OnInit{
 				this.note.noteProspectId = this.prospect.prospectId;
 
 
-				this.noteService.getNotesByNoteProspectId(this.note.noteProspectId)
+				this.noteService.getNotesByNoteProspectId(this.prospect.prospectId)
 					.subscribe(notes => this.notes = notes);
-
+				console.log(this.prospect.prospectId);
 
 				this.prospectCohortService.getProspectCohortsByProspectId(this.prospect.prospectId)
 					.subscribe(prospectCohorts => this.prospectCohorts = prospectCohorts);
-				console.log(this.prospect);
+
 			});
 	}
 	reloadNoteTypes() : void {
 		this.noteTypeService.getAllNoteTypes()
 			.subscribe(noteTypes => this.noteTypes = noteTypes);
-			console.log(this.noteTypes);
+
 	}
 	createNote() : void {
 		this.noteService.createNote(this.note)
 			.subscribe(status => {
-				console.log("create note running");
 				this.status = status;
 				if(status.apiStatus === 200) {
 					this.reloadProspect();
