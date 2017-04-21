@@ -28,6 +28,7 @@ export class NoteTypeComponent implements OnInit {
 			.subscribe(noteTypes => this.noteTypes = noteTypes);
 	}
 
+
 	createNoteType() : void {
 		this.noteTypeService.createNoteType(this.noteType)
 			.subscribe(status => {

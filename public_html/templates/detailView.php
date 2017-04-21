@@ -80,8 +80,9 @@
 													<div class="input-group-addon">
 														<i class="fa fa-comment" aria-hidden="true"></i>
 													</div>
-													<textarea name="noteContent" id="noteContent" class="form-control" maxlength="255" required [(ngModel)]="note.noteContent" #noteContent="ngModel" rows="5"></textarea>
+													<textarea name="noteContent" id="noteContent" class="form-control" maxlength="300" required [(ngModel)]="note.noteContent" #noteContent="ngModel" rows="5"></textarea>
 												</div>
+												<div>Max Length of 300 characters: {{noteContent.value.length}}</div>
 												<div [hidden]="noteContent.valid || noteContent.pristine" class="alert alert-danger" role="alert">
 													<p *ngIf="noteContent.errors?.required">Note content is required.</p>
 													<p *ngIf="noteContent.errors?.maxlength">Note content is too long.</p>
@@ -106,12 +107,12 @@
 				</tr>
 				<tr>
 					<td>Date</td>
-					<td>Preview</td>
+					<td>Note</td>
 				</tr>
 			</thead>
 			<tr *ngFor="let note of notes">
 				<td>{{ note.noteDateTime | date : 'medium' }}</td>
-				<td>{{ note.noteContent | slice:0:15 }}</td>
+				<td>{{ note.noteContent | slice:0:300 }}</td>
 			</tr>
 		</table>
 	</div>

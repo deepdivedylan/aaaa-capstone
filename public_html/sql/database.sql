@@ -134,7 +134,7 @@ CREATE TABLE note(
 	noteApplicationId INT UNSIGNED,
 	noteProspectId INT UNSIGNED,
 	noteNoteTypeId INT UNSIGNED NOT NULL,
-	noteContent VARCHAR(2000) NOT NULL,
+	noteContent VARCHAR(300) NOT NULL,
 	noteDateTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	noteBridgeStaffId CHAR(9),
 	INDEX (noteId),

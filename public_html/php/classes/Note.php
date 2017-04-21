@@ -173,7 +173,7 @@ class Note  implements \JsonSerializable {
 			throw (new \InvalidArgumentException("Note content is either empty or insecure."));
 			//store content of the note
 		}
-		if(strlen($newNoteContent) > 2000) {
+		if(strlen($newNoteContent) > 300) {
 			throw(new \RangeException("note content too large"));
 		}
 		$this->noteContent = $newNoteContent;
