@@ -31,19 +31,22 @@ INSERT INTO application (applicationID,
 								 applicationUtmSource)
 VALUES (NULL, "Foo2", "Bar2", "test2@test.net", "5052345679", "sourceempty2", "aboutempty2","hopeempty2", "expempty2", CURRENT_TIMESTAMP, "empty2", "empty2", "empty2");
 
-
 INSERT INTO applicationCohort (applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId)
 	VALUE (NULL, 1, 1);
 
 INSERT INTO applicationCohort (applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId)
 	VALUE (NULL, 2, 2);
 
+/*INSERT INTO statusType (statusTypeId, statusTypeName) VALUES (NULL, 1)
+/*INSERT INTO placard (placardId, placardNumber, placardStatusTypeId) VALUES (1, 1, 1);
+INSERT INTO swipe (swipeId, swipeNumber, swipeStatusTypeId) VALUES (1, 1, 1);*/
+/*INSERT INTO studentPermit (studentPermitId, studentPermitApplicationId, studentPermitSwipeId, studentPermitPlacardId, studentPermitCheckOutDate, studentPermitCheckInDate) VALUES (NULL, 1, 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+*/
 
 
 
 
-
-SELECT * FROM application, cohort AS tempApp, tempCohort;
+/*SELECT * FROM application, cohort AS tempApp, tempCohort;*/
 
 
 
