@@ -99,15 +99,26 @@
 								</div>
 							</div>
 						</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td>Date</td>
 						<td>Note</td>
+						<td>Note Type</td>
 					</tr>
 				</thead>
 				<tr *ngFor="let note of notes" style="max-width: 200px; table-layout:fixed;">
 					<td>{{ note.noteDateTime | date : 'medium' }}</td>
 					<td><p class="note-content-p">{{ note.noteContent | slice:0:300 }}</p></td>
+					<td>
+						<div *ngFor="let noteType of noteTypes">
+							<div [ngSwitch]="noteType.noteTypeId">
+								<div *ngSwitchCase="note.noteNoteTypeId">
+									{{noteType.noteTypeName}}
+								</div>
+							</div>
+						</div>
+					</td>
 				</tr>
 			</table>
 		</div>
