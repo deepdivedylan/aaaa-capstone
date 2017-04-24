@@ -1,4 +1,5 @@
 <section class="container-fluid">
+	<navbar></navbar>
 	<div class="row application-page">
 		<div class="col-xs-12">
 			<h2>Applications</h2>

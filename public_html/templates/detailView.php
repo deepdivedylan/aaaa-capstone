@@ -2,6 +2,7 @@
 	<div class="row" xmlns="http://www.w3.org/1999/html">
 		<div class="col-xs-12">
 			<table class="table table-bordered table-hover">
+				<navbar></navbar>
 				<thead>
 					<tr>
 						<td>application Details:</td>

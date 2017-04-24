@@ -2,6 +2,7 @@
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 			<form #loginForm="ngForm" name="loginForm" id="loginForm" class="form-horizontal well" (ngSubmit)="login();" novalidate>
+				<navbar></navbar>
 
 				<div class="form-group" [ngClass]="{ 'has-error': username.touched && username.invalid }">
 					<label for="username">User Name: </label>
