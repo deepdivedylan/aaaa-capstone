@@ -17,6 +17,8 @@ import {Status} from "../classes/status";
 
 export class PkgViewComponent implements OnInit{
 	@ViewChild("pkgView") pkgView : any;
+	application : Application = new Application(null, "", "", "", "", "", "", "", "", "", "", "", "");
+	studentPermit : StudentPermit = new StudentPermit(null, null, null, null, "", "");
 	studentPermits : StudentPermit[] = [];
 	applications: Application[] = [];
 	applicationCohorts : ApplicationCohort[] = [];
@@ -28,7 +30,8 @@ export class PkgViewComponent implements OnInit{
 		private applicationService: ApplicationService,
 		private applicationCohortService: ApplicationCohortService,
 		private cohortService: CohortService,
-		private router: Router
+		private router: Router,
+		private activatedRoute: ActivatedRoute
 	) {}
 
 	ngOnInit() : void {
