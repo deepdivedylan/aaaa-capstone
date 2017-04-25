@@ -18,7 +18,7 @@
 									<input type="date" name="studentPermitCheckOutDate" id="studentPermitCheckOutDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckOutDate" #studentPermitCheckOutDate="ngModel">
 									<label for="studentPermitCheckInDate">Check In Date:</label>
 									<input type="date" name="studentPermitCheckInDate" id="studentPermitCheckInDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckInDate" #studentPermitCheckInDate="ngModel">
-									<input type=""
+
 								</div>
 							</div>
 							<div class="modal-footer">
