@@ -30,7 +30,7 @@ class StatusType implements \JsonSerializable {
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs
 	 */
-	public function __construct(int $newStatusTypeId = null, int $newStatusTypeName) {
+	public function __construct(int $newStatusTypeId = null, string $newStatusTypeName) {
 		try {
 			$this->setStatusTypeId($newStatusTypeId);
 			$this->setStatusTypeName($newStatusTypeName);
@@ -84,9 +84,11 @@ class StatusType implements \JsonSerializable {
 	 * @throws \TypeError throws if $newStatusTypedName is not an integer
 	 *
 	 */
-	public function setStatusTypeName(int $newStatusTypeName) {
-		if($newStatusTypeName <= 0){
-			throw (new \RangeException("Status type name must be positive"));
+	public function setStatusTypeName(string $newStatusTypeName) {
+		$newStatusTypeName = trim($newStatusTypeName);
+		$newStatusTypeName = filter_var($newStatusTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty ($newStatusTypeName) === true){
+			throw(new \InvalidArgumentException("Statustype is empty or insecure"));
 		}
 		$this->statusTypeName = $newStatusTypeName;
 	}
@@ -178,12 +180,13 @@ class StatusType implements \JsonSerializable {
 	 * @throws \PDOException throws when mySQL errors occur
 	 * @throws \TypeError throws if $pdo is not a connection object
 	 */
-	public static function getStatusTypesByStatusTypeName(\PDO $pdo, int $statusTypeName) {
+	public static function getStatusTypesByStatusTypeName(\PDO $pdo, string $statusTypeName) {
 		// sanitize the statusTypeId before searching
-		if($statusTypeName <= 0) {
-			throw(new \PDOException("statusTypeName not positive"));
+		$statusTypeName = trim($statusTypeName);
+		$statusTypeName = filter_var($statusTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty ($statusTypeName) === true){
+			throw(new \InvalidArgumentException("Statustype is empty or insecure"));
 		}
-
 		// create query template
 		$query = "SELECT statusTypeId, statusTypeName FROM statusType WHERE statusTypeName = :statusTypeName";
 		$statement = $pdo->prepare($query);

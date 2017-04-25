@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<!--<navbar></navbar>-->
-			<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Permit</button>
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Permit</button>
 				<div id="myModal" class="modal fade">
 					<div class="modal-dialog">
 						<form #pkgForm="ngForm" name="pkgView" id="pkgView" class="form-horizontal well" (ngSubmit)="createStudentPermit();" novalidate>
@@ -18,17 +18,17 @@
 									<input type="date" name="studentPermitCheckOutDate" id="studentPermitCheckOutDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckOutDate" #studentPermitCheckOutDate="ngModel">
 									<label for="studentPermitCheckInDate">Check In Date:</label>
 									<input type="date" name="studentPermitCheckInDate" id="studentPermitCheckInDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckInDate" #studentPermitCheckInDate="ngModel">
-
+									<input type=""
 								</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<input type="submit" class="btn btn-info" value="Submit">
+								<input type="submit" class="btn btn-info" value="Submit">1
 							</div>
 						</form>
 
 					</div>
-				</div>-->
+				</div>
 			<table class="table table-bordered table-hover table-parking">
 				<thead>
 					<tr>

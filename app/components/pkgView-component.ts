@@ -35,28 +35,28 @@ export class PkgViewComponent implements OnInit{
 	) {}
 
 	ngOnInit() : void {
-		this.reloadStudentPermit()
+		/*this.reloadStudentPermit();*/
 		this.reloadStudentPermits();
 		this.reloadApplications();
 		this.reloadApplicationCohorts();
 		this.reloadCohorts();
 	}
-	reloadStudentPermit()	 : void {
+	/*reloadStudentPermit()	 : void {
 		this.activatedRoute.params
 			.switchMap((params : Params) => this.studentPermitService.getStudentPermitByApplicationId(+params["applicationId"]))
 			.subscribe(studentPermit => {
 				this.studentPermit = studentPermit;
-				/*this.testDate = application.applicationDateTime;*/
-				/*this.note.noteApplicationId = this.application.applicationId;
+				/!*this.testDate = application.applicationDateTime;*!/
+				/!*this.note.noteApplicationId = this.application.applicationId;
 
 				this.noteService.getNotesByNoteApplicationId(this.application.applicationId)
-					.subscribe(notes => this.notes = notes);*/
+					.subscribe(notes => this.notes = notes);*!/
 
 				this.applicationCohortService.getApplicationCohortsByApplicationId(this.application.applicationId)
 					.subscribe(applicationCohorts => this.applicationCohorts = applicationCohorts);
 
 			});
-	}
+	}*/
 	reloadApplications()	 : void {
 		this.applicationService.getAllApplications()
 			.subscribe(applications => this.applications = applications);
@@ -75,5 +75,14 @@ export class PkgViewComponent implements OnInit{
 		this.studentPermitService.getAllStudentPermits()
 			.subscribe(studentPermits => this.studentPermits = studentPermits);
 	}
-
+	createStudentPermit() : void {
+		this.studentPermitService.createStudentPermit(this.studentPermit)
+			.subscribe(status => {
+				this.status = status;
+				if(status.apiStatus === 200) {
+					this.reloadStudentPermits();
+					this.pkgView.reset();
+				}
+			});
+	}
 }

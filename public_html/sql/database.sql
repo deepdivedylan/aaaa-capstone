@@ -61,7 +61,7 @@ CREATE TABLE prospect(
 
 CREATE TABLE statusType(
 	statusTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	statusTypeName INT UNSIGNED NOT NULL UNIQUE,
+	statusTypeName VARCHAR(15) NOT NULL UNIQUE,
 	INDEX (statusTypeId),
 	PRIMARY KEY (statusTypeId)
 );
