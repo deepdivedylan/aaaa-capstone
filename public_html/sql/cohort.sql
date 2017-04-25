@@ -36,12 +36,12 @@ INSERT INTO applicationCohort (applicationCohortId, applicationCohortApplication
 
 INSERT INTO applicationCohort (applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId)
 	VALUE (NULL, 2, 2);
+INSERT INTO statusType (statusTypeId, statusTypeName)  VALUE (1, "Checked Out");
+INSERT INTO statusType (statusTypeId, statusTypeName) VALUE (2, "Checked In");
+INSERT INTO placard (placardId, placardNumber, placardStatusTypeId) VALUES (NULL, 1, 1);
+INSERT INTO swipe (swipeId, swipeNumber, swipeStatusTypeId) VALUES (NULL, 1, 1);
+INSERT INTO studentPermit (studentPermitId, studentPermitApplicationId, studentPermitSwipeId, studentPermitPlacardId, studentPermitCheckOutDate, studentPermitCheckInDate) VALUES (NULL, 1, 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-/*INSERT INTO statusType (statusTypeId, statusTypeName) VALUES (NULL, 1)
-/*INSERT INTO placard (placardId, placardNumber, placardStatusTypeId) VALUES (1, 1, 1);
-INSERT INTO swipe (swipeId, swipeNumber, swipeStatusTypeId) VALUES (1, 1, 1);*/
-/*INSERT INTO studentPermit (studentPermitId, studentPermitApplicationId, studentPermitSwipeId, studentPermitPlacardId, studentPermitCheckOutDate, studentPermitCheckInDate) VALUES (NULL, 1, 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-*/
 
 
 
