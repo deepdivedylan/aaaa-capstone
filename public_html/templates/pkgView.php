@@ -16,14 +16,14 @@
 									<textarea name="studentPermitPlacardId" id="studentPermitPlacardId" class="form-control" required [(ngModel)]="studentPermit.studentPermitPlacardId" #studentPermitPlacardId="ngModel"></textarea>
 									<label for="studentPermitCheckOutDate">Check Out Date:</label>
 									<input type="date" name="studentPermitCheckOutDate" id="studentPermitCheckOutDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckOutDate" #studentPermitCheckOutDate="ngModel">
-									<label for="studentPermitCheckInDate">Check In Date:</label>
-									<input type="date" name="studentPermitCheckInDate" id="studentPermitCheckInDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckInDate" #studentPermitCheckInDate="ngModel">
+									<!--<label for="studentPermitCheckInDate">Check In Date:</label>-->
+									<input type="hidden" name="studentPermitCheckInDate" id="studentPermitCheckInDate" class="form-control" required [(ngModel)]="studentPermit.studentPermitCheckInDate" #studentPermitCheckInDate="ngModel" value="setTimestamp(0)">
 
 								</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<input type="submit" class="btn btn-info" value="Submit">1
+								<input type="submit" class="btn btn-info" value="Submit">
 							</div>
 						</form>
 

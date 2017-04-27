@@ -6,6 +6,7 @@ namespace Edu\Cnm\DdcAaaa;
  * keeps track of placard / swipe pairs for each student permit
  * @package Edu\Cnm\DdcAaaa
  */
+
 class StudentPermit implements \JsonSerializable {
 	use ValidateDate;
 
@@ -233,10 +234,11 @@ class StudentPermit implements \JsonSerializable {
 		// create query template
 		$query = "INSERT INTO studentPermit(studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate) VALUES(:studentPermitApplicationId, :studentPermitPlacardId, :studentPermitSwipeId, :studentPermitCheckOutDate, :studentPermitCheckInDate)";
 		$statement = $pdo->prepare($query);
-
+		$dateOfBt=date_create();
 		// bind the member variables to the place holders in the template
 		$formattedCheckOutDate = $this->getStudentPermitCheckOutDate()->format("Y-m-d");
-		$formattedCheckInDate = $this->getStudentPermitCheckInDate()->format("Y-m-d");
+		$formattedCheckInDate = date_timestamp_set($dateOfBt, 0)->format("Y-m-d");
+
 
 		$parameters = [
 			"studentPermitApplicationId" => $this->studentPermitApplicationId,
