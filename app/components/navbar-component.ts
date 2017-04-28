@@ -1,52 +1,34 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
+import {ApplicationService} from "../services/application-service";
+import {Application} from "../classes/application";
+
 
 @Component({
 	selector: "navbar",
-	templateUrl: "./templates/navba.php"
+	templateUrl: "./templates/navbar.php"
 })
+export class NavbarComponent{
 
-export class NavbarComponent { }
+	searchResults: Application[] = []; // search results
+
+	ApplicationLastName: string = "";
+	ApplicationFirstName: string ="";
+
+	applicationResults: Application;
+
+	constructor(private applicationService: ApplicationService) {}
+
+
+	searchForApplicationLastName(): void {
+		this.applicationService.getApplicationByApplicationLastName(this.ApplicationLastName).subscribe(Application=>this.searchResults = Application);
+	}
 
 
 
-filterByLastName() : void {
-	this.searchByLastNameFiltered = [];
-if(this.searchByLastNameSearch !== null) {
-	this.searchByLastNameWordSearch = null;
-	this.searchByLastNameObservable
-		.filter(searchByLastName => searchBy.lastName.indexOf(this.lastNameSearch) >= 0)
-		.subscribe(search => this.searchByLastNameFiltered.push(search));
-} else {
-	this.searchByLastNameObservable
-		.subscribe(searchByLastName => this.searchByLastNameFiltered.push(searchByLastName))
-}
-}
+	searchForApplicationFirstName(): void {
 
-filterByFirstName() : void {
-	this.searchByFirstNameFiltered = [];
-if(this.searchByFirstNameSearch !== null) {
-	this.searchByFirstNameSearch = null;
-	this.searchByFirstNameObservable
-		.filter(searchByFirstName => searchBy.firstName.indexOf(this.firstNameSearch.toLowerCase()) >= 0)
-		.subscribe(searchFirstName => this.searchByFirstNameFiltered.push(searchByFirstName));
-} else {
-	this.searchByFirstNameObservable
-		.subscribe(searchByFirstName => this.searchByFirstNameFiltered.push(searchByLastName))
-}
 
-}
-
-private searchByNameUrl = "api/searchByName/";
-
-getAllNames() : Observable<Names[]> {
-	return(this.http.get(this.searchUrl)
-	.map(this.extractData)
-	.catch(this.handleError));
-}
-
-getNames(: number) : Observable<Diceware> {
-	return(this.http.get(this.dicewareUrl + roll)
-	.map(this.extractData)
-	.catch(this.handleError));
+		this.applicationService.getApplicationsByapplicationFirstName(this.ApplicationFirstName).subscribe(Application=>this.searchResults = Application);
+	}
 }

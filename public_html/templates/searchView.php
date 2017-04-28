@@ -2,7 +2,6 @@
 
 <h1>Search Students</h1>
 
-
 <div class="row">
 	<div class="col-md-6">
 		<div class="input-group">

@@ -36,10 +36,17 @@ export class ApplicationService extends BaseService {
 			.map(this.extractData)
 			.catch(this.handleError));
 	}
-	getApplicationsByApplicationName(applicationFirstName: string, applicationLastName: string) : Observable<Application[]> {
-		return(this.http.get(this.applicationUrl + applicationFirstName + applicationLastName)
+
+	getApplicationsByApplicationFirstName (applicationFirstName: string,) : Observable<Application[]> {
+		return(this.http.get(this.applicationUrl + applicationFirstName))
 			.map(this.extractData)
-			.catch(this.handleError));
+			._catch(this.handleError);
+	}
+	getApplicationByApplicationLastName (applicationLastName: string,) : Observable<Application[]>{
+		return(this.http.get(this.applicationUrl + applicationLastName))
+			.map(this.extractData)
+			.catch(this.handleError);
+
 	}
 
 	createApplication(application: Application) : Observable<Status> {
