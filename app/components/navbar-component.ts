@@ -29,6 +29,6 @@ export class NavbarComponent{
 	searchForApplicationFirstName(): void {
 
 
-		this.applicationService.getApplicationsByapplicationFirstName(this.ApplicationFirstName).subscribe(Application=>this.searchResults = Application);
+		this.applicationService.getApplicationsByApplicationFirstName(this.ApplicationFirstName).subscribe(Application=>this.searchResults = Application);
 	}
 }
