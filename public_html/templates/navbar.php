@@ -15,7 +15,8 @@
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<form class="navbar-form navbar-right">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search">
+				<input type="text" class="form-control" placeholder="Search First Name" id="applicantFirstName" name="applicantFirstName" title="applicantFirstName" [(ngModel)]="ApplicationFirstName" (keyup)="searchForApplicationFirstName();">
+				<input type="text" class="form-control" placeholder="Search Last Name" id="applicantLastName" name="applicantLastName" title="applicantLastName" [(ngModel)]="ApplicationLastName" (keyup)="searchForApplicationLastName();">
 			</div>
 			<button type="submit" class="btn btn-default">Search</button>
 		</form>

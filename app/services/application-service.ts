@@ -46,7 +46,6 @@ export class ApplicationService extends BaseService {
 		return(this.http.get(this.applicationUrl + applicationLastName))
 			.map(this.extractData)
 			.catch(this.handleError);
-
 	}
 
 	createApplication(application: Application) : Observable<Status> {
