@@ -1,13 +1,18 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Output} from "@angular/core";
 import {Router} from "@angular/router";
 import {ApplicationService} from "../services/application-service";
 import {Application} from "../classes/application";
+import {EventEmitter} from "@angular/core";
 
 @Component({
 	selector: "navbar",
 	templateUrl: "./templates/navbar.php"
 })
+
 export class NavbarComponent implements OnInit {
+
+	@Output() open: EventEmitter<any> = new EventEmitter();
+	@Output() close: EventEmitter<any> = new EventEmitter();
 
 	searchResults: Application[] = []; // search results
 
