@@ -43,10 +43,10 @@ export class AppViewComponent implements OnInit{
 			.subscribe(applicationCohorts => this.applicationCohorts = applicationCohorts);
 	}
 
-	filterApplicationsByLastName() : void {
+	/*filterApplicationsByLastName() : void {
 		this.applicationService.getApplicationsByApplicationLastName()
 			.subscribe(applications => this.applications = applications);
-	}
+	}*/
 
 	// filterApplicationsByFirstName
 

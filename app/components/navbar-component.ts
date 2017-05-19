@@ -27,11 +27,11 @@ export class NavbarComponent implements OnInit {
 		this.applicationService.getAllApplications();
 	}
 
-	searchForApplicationLastName(): void {
+/*	searchForApplicationLastName(): void {
 		this.applicationService.getApplicationByApplicationLastName(this.ApplicationLastName).subscribe(Application=>this.searchResults = Application);
 	}
 
 	searchForApplicationFirstName(): void {
 		this.applicationService.getApplicationsByApplicationFirstName(this.ApplicationFirstName).subscribe(Application=>this.searchResults = Application);
-	}
+	}*/
 }

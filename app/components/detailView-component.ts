@@ -50,7 +50,7 @@ export class DetailViewComponent implements OnInit{
 				this.note.noteApplicationId = this.application.applicationId;
 
 				this.noteService.getNotesByNoteApplicationId(this.application.applicationId)
-					.subscribe(notes => this.notes = notes);
+					.subscribe(notes => this.notes = notes.reverse());
 
 				this.applicationCohortService.getApplicationCohortsByApplicationId(this.application.applicationId)
 					.subscribe(applicationCohorts => this.applicationCohorts = applicationCohorts);

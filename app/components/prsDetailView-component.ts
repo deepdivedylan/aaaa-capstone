@@ -54,7 +54,7 @@ export class PrsDetailViewComponent implements OnInit{
 
 
 				this.noteService.getNotesByNoteProspectId(this.prospect.prospectId)
-					.subscribe(notes => this.notes = notes);
+					.subscribe(notes => this.notes = notes.reverse());
 
 				this.prospectCohortService.getProspectCohortsByProspectId(this.prospect.prospectId)
 					.subscribe(prospectCohorts => this.prospectCohorts = prospectCohorts);
