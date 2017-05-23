@@ -11,9 +11,8 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<base href="<?php echo dirname($_SERVER["PHP_SELF"]) . "/"; ?>" />
 
-		<link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
 
-		<link href="https://webstrategy.cloud.typography.com/css?family=Vitesse" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Coda" rel="stylesheet">
 
 		<title>AAAA Capstone</title>
 	</head>
