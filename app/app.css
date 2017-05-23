@@ -1,6 +1,8 @@
 /**
 * this is css for select nav on noteType form
 **/
+
+html{font-family: "Vittesse-Bold"};
 .form-control-1 {
 	 width: 75%;
  }
