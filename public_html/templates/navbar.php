@@ -4,13 +4,13 @@
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
 				  data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			<img class="pull-left logo visible-xs" src="images/cnm_Ingenuity_logo.phg" />
+			<img class="pull-left logo visible-xs" src="../../app/images/cnm_Ingenuity_logo .png" />
 			<span class="sr-only">Toggle navigation</span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand">CNM Ingenuity, Inc</a>
+		<a class="navbar-brand">CNM Ingenuity</a>
 	</div>
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
