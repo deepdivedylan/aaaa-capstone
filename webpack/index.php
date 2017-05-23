@@ -10,6 +10,9 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<base href="<?php echo dirname($_SERVER["PHP_SELF"]) . "/"; ?>" />
+		<link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+		<link href="https://fonts.cloud.typography.com/css?family=Abril+Fatface" rel="stylesheet">
+
 
 		<title>AAAA Capstone</title>
 	</head>
