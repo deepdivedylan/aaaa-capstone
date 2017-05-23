@@ -3,6 +3,8 @@ import {Router} from "@angular/router";
 import {ApplicationService} from "../services/application-service";
 import {Application} from "../classes/application";
 import {EventEmitter} from "@angular/core";
+import {NoteType} from "../classes/noteType";
+import {NoteTypeService} from "../services/noteType-service";
 
 @Component({
 	selector: "navbar",
@@ -13,6 +15,7 @@ export class NavbarComponent implements OnInit {
 
 	@Output() open: EventEmitter<any> = new EventEmitter();
 	@Output() close: EventEmitter<any> = new EventEmitter();
+	noteTypes: NoteType[] = [];
 
 	searchResults: Application[] = []; // search results
 
@@ -21,10 +24,17 @@ export class NavbarComponent implements OnInit {
 
 	applicationResults: Application;
 
-	constructor(private applicationService: ApplicationService) {}
+	constructor(private applicationService: ApplicationService, private noteTypeService: NoteTypeService) {
+
+	}
 
 	ngOnInit() : void {
 		this.applicationService.getAllApplications();
+		this.reloadNoteTypes();
+	}
+	reloadNoteTypes() : void {
+		this.noteTypeService.getAllNoteTypes()
+			.subscribe(noteTypes => this.noteTypes = noteTypes);
 	}
 
 /*	searchForApplicationLastName(): void {

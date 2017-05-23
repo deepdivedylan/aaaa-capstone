@@ -41,7 +41,7 @@
 							</div>
 							<div class="modal-body">
 								<!-- FORM -->
-								<form #mailListForm="ngForm" name="mailList" id="mailList" class="form-horizontal well"
+						<!--		<form #mailListForm="ngForm" name="mailList" id="mailList" class="form-horizontal well"
 										(ngSubmit)="createMailList();" novalidate>
 									<div class="modal-body">
 										<label>Note Type:</label>
@@ -58,7 +58,7 @@
 
 										</div>
 									</div>
-								</form>
+								</form>-->
 								<!-- FORM -->
 							</div>
 							<div class="modal-footer">

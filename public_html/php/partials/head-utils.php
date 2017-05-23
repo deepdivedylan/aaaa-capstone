@@ -32,12 +32,7 @@ setXsrfCookie();
 				<link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
 				<link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet">
 				<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-
-				<!-- Hoefler fontsTypography -->
-				<link href="https://webstrategy.cloud.typography.com/css?family=Vitesse" rel="stylesheet">
-
 				<!-- Our Custom CSS -->
-
 				<link rel="stylesheet" href="css/style.css" type="text/css">
 
 				<!--Angular JS Libraries incorporated from templating angular class-->
