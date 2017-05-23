@@ -62,8 +62,6 @@ setXsrfCookie();
 				<script src="angular/controllers/home-controller.js"></script>
 
 
-
-
 				<title>CNM Ingenuity, Inc.</title>
 			</head>
 
