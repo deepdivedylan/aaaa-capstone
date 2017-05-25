@@ -1,16 +1,16 @@
-
 <nav class="navbar navbar-default">
 	<!-- Brand and toggle get grouped for better mobile display -->
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
 				  data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			<img class="pull-left logo visible-xs" src="../../app/images/cnm_Ingenuity_logo .png" />
 			<span class="sr-only">Toggle navigation</span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand">CNM Ingenuity</a>
+		<div class="col-xs-10 col-lg-12 col-md-12">
+			<a class="navbar-brand" routerLink="/"><img class="img-responsive" src="images/logo.png"/> </a>
+		</div>
 	</div>
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
@@ -29,12 +29,12 @@
 			<li><a routerLink="/mobView/">Quick Prospect</a></li>
 			<li><a routerLink="/prsView/">Prospects</a></li>
 			<li><!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+				<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mailModal">
 					Mailing List
 				</button>
 
 				<!-- Modal -->
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal fade" id="mailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -43,7 +43,7 @@
 							</div>
 							<div class="modal-body">
 								<!-- FORM -->
-						<!--		<form #mailListForm="ngForm" name="mailList" id="mailList" class="form-horizontal well"
+								<form #mailListForm="ngForm" name="mailList" id="mailList" class="form-horizontal well"
 										(ngSubmit)="createMailList();" novalidate>
 									<div class="modal-body">
 										<label>Note Type:</label>
@@ -60,7 +60,7 @@
 
 										</div>
 									</div>
-								</form>-->
+								</form>
 								<!-- FORM -->
 							</div>
 							<div class="modal-footer">
