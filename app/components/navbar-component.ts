@@ -9,12 +9,12 @@ import {NoteTypeService} from "../services/noteType-service";
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-	//selector: "navbar",
+	selector: "navbar",
 	templateUrl: "./templates/navbar.php"
 })
 
 export class NavbarComponent implements OnInit {
-	@ViewChild("navbar") navbar : any;
+
 	@Output() open: EventEmitter<any> = new EventEmitter();
 	@Output() close: EventEmitter<any> = new EventEmitter();
 	noteTypes: NoteType[] = [];

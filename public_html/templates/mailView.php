@@ -3,9 +3,10 @@
 		<div class="col-xs-12">
 			<navbar></navbar>
 			<table class="table table-bordered table-hover">
+
 				<thead>
 					<tr>
-						<td>application Details:</td>
+						<td>application Details:
 						<td></td>
 					</tr>
 				</thead>

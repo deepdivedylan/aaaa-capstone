@@ -9,6 +9,7 @@ import {PrsViewComponent} from "./components/prsView-component";
 import {MobViewComponent} from "./components/mobView-component";
 import {LoginViewComponent} from "./components/loginView-component";
 import {NavbarComponent} from "./components/navbar-component";
+import {MailViewComponent} from "./components/mailView-component";
 
 export const allAppComponents = [
 	HomeComponent,
@@ -20,20 +21,23 @@ export const allAppComponents = [
 	PrsDetailViewComponent,
 	MobViewComponent,
 	LoginViewComponent,
-	NavbarComponent
+	NavbarComponent,
+	MailViewComponent
 
 ];
 
 export const routes: Routes = [
 	{path: "", component: HomeComponent},
 	{path: "noteType", component: NoteTypeComponent },
+	{path: "navbar", component: NavbarComponent },
 	{path: "appView", component: AppViewComponent },
 	{path: "prsView", component: PrsViewComponent },
 	{path: "pkgView", component: PkgViewComponent },
 	{path: "detailView/:applicationId", component: DetailViewComponent },
 	{path: "prsDetailView/:prospectId", component: PrsDetailViewComponent },
 	{path: "loginView", component: LoginViewComponent},
-	{path: "mobView", component: MobViewComponent}
+	{path: "mobView", component: MobViewComponent},
+	{path: "mailView", component: MailViewComponent}
 ];
 
 export const appRoutingProviders: any[] = [];
