@@ -4,6 +4,9 @@
 
 body, html{
 	font-family: 'Coda', cursive;
+	background: url("images/stemcenter.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 .form-control-1 {
 	 width: 75%;
