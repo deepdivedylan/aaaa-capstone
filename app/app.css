@@ -85,3 +85,7 @@ tbody.noteType {
 	background-color: #b3deb4;
 }
 
+/*pkgView*/
+button[data-target="#myModal"] {
+
+}
