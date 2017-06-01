@@ -1,6 +1,6 @@
 <navbar></navbar>
 <section class="container-fluid">
-	<navbar></navbar>
+
 	<div class="row">
 		<div class="col-xs-10 col-xs-offset-1 well">
 			<h2>Prospects</h2>

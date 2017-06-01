@@ -1,7 +1,8 @@
+<navbar></navbar>
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<navbar></navbar>
+
 
 			<form #quickProspectForm="ngForm" name="quickProspectForm" id="quickProspectForm" class="form-horizontal well"  (ngSubmit)="createProspect();" novalidate>
 				<!--				First Name-->
