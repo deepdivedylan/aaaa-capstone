@@ -93,10 +93,3 @@ button[data-target="#myModal"] {
 	margin: 1rem 0;
 }
 
-div.homepage-view {
-	background-image: url("images/plaza.png");
-	background-size: 100%;
-	min-height: 100vh;
-	position: relative;
-	background-color: rgba(0,0,0,0.1);
-}

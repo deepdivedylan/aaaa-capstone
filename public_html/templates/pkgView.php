@@ -1,7 +1,7 @@
 <section class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
-			<navbar></navbar>
+			<div class="col-xs-10 col-xs-offset-1 well">
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Permit</button>
 				<div id="myModal" class="modal fade">
 					<div class="modal-dialog">
