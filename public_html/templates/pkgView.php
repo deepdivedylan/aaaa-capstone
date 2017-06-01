@@ -1,4 +1,5 @@
 <section class="container-fluid">
+	<navbar></navbar>
 	<div class="row">
 		<div class="col-xs-10 col-xs-offset-1 well">
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Permit</button>
