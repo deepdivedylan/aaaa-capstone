@@ -1,8 +1,9 @@
+<navbar></navbar>
+<div class="container-fluid">
 
-<div class="container">
 	<div class="row" xmlns="http://www.w3.org/1999/html">
-		<div class="col-xs-12">
-			<navbar></navbar>
+		<div class="col-xs-10 col-xs-offset-1 well">
+
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
@@ -42,7 +43,7 @@
 </div>
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-xs-10 col-xs-offset-1 well">
 			<table class="note-table table table-bordered table-hover">
 				<thead>
 					<tr>

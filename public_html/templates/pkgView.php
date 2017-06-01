@@ -1,3 +1,4 @@
+<navbar></navbar>
 <section class="container-fluid">
 	<navbar></navbar>
 	<div class="row">

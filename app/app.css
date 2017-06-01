@@ -4,7 +4,8 @@
 
 body, html{
 	font-family: 'Coda', cursive;
-	background: url("images/stemcenter.jpg");
+	background: url("images/stemcenter.jpg") 100% fixed;
+
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -93,3 +94,9 @@ button[data-target="#myModal"] {
 	margin: 1rem 0;
 }
 
+div.homepage-view {
+	background-size: 100%;
+	min-height: 100vh;
+	position: relative;
+	background-color: rgba(0,0,0,0.1);
+}
