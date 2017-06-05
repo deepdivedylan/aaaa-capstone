@@ -18,17 +18,17 @@ class Note  implements \JsonSerializable {
 	 * Id of the note that was sent by the user.
 	 * @var int noteNoteTypeId
 	 */
-	private $noteNoteTypeId;
+	public $noteNoteTypeId;
 	/**
 	 * Id of the applicant that sent the note
 	 * @var int $noteApplicationId
 	 */
-	private $noteApplicationId;
+	public $noteApplicationId;
 	/**
 	 * Id of the potential prospective student
 	 * @var int $noteProspectId
 	 */
-	private $noteProspectId;
+	public $noteProspectId;
 	/**
 	 * @var \DateTime $noteDateTime
 	 */

@@ -7,11 +7,15 @@ import {Note} from "../classes/note";
 import {NoteService} from "../services/note-service";
 import {Application} from "../classes/application";
 import {ApplicationCohort} from "../classes/applicationCohort";
+import {Prospect} from "../classes/prospect"
+import {ProspectCohort} from "../classes/prospectCohort";
 import {NoteType} from "../classes/noteType";
 import {NoteTypeService} from "../services/noteType-service";
 import {Status} from "../classes/status";
 
 import 'rxjs/add/operator/switchMap';
+import {ProspectService} from "../services/prospect-service";
+import {ProspectCohortService} from "../services/prospectCohort-service";
 
 @Component({
 	templateUrl: "./templates/mailView.php"
@@ -21,6 +25,8 @@ export class MailViewComponent implements OnInit{
 	@ViewChild("mailView") mailView : any;
 	application : Application = new Application(null, "", "", "", "", "", "", "", "", "", "", "", "");
 	applicationCohorts : ApplicationCohort[] = [];
+	prospect : Prospect = new Prospect(null, "", "", "", "");
+	prospectCohorts : ProspectCohort[] = [];
 	notes : Note[] = [];
 	note : Note = new Note(null, null, null, null, "", "");
 	status: Status = null;
@@ -32,12 +38,15 @@ export class MailViewComponent implements OnInit{
 		private applicationCohortService: ApplicationCohortService,
 		private noteService: NoteService,
 		private noteTypeService: NoteTypeService,
+		private prospectService: ProspectService,
+		private prospectCohortService: ProspectCohortService,
 		private router: Router,
 		private activatedRoute: ActivatedRoute
 	) {}
 
 	ngOnInit() : void {
 		this.reloadApplication();
+		this.reloadProspect();
 		this.reloadNoteTypes();
 	}
 
@@ -54,6 +63,24 @@ export class MailViewComponent implements OnInit{
 
 				this.applicationCohortService.getApplicationCohortsByApplicationId(this.application.applicationId)
 					.subscribe(applicationCohorts => this.applicationCohorts = applicationCohorts);
+
+			});
+	}
+	reloadProspect()	 : void {
+		this.activatedRoute.params
+			.switchMap((params : Params) => this.prospectService.getProspectByProspectId(+params["prospectId"]))
+			.subscribe(prospect => {
+				this.prospect = prospect[0];
+				this.note.noteProspectId = this.prospect.prospectId;
+
+
+				this.noteService.getNotesByNoteProspectId(this.prospect.prospectId)
+					.subscribe(notes => this.notes = notes.reverse());
+
+				this.prospectCohortService.getProspectCohortsByProspectId(this.prospect.prospectId)
+					.subscribe(prospectCohorts => this.prospectCohorts = prospectCohorts);
+
+
 
 			});
 	}

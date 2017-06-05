@@ -3,7 +3,6 @@
 	<div class="row">
 		<div class="col-md-12">
 
-
 			<form #quickProspectForm="ngForm" name="quickProspectForm" id="quickProspectForm" class="form-horizontal well"  (ngSubmit)="createProspect();" novalidate>
 				<!--				First Name-->
 				<div class="form-group" [ngClass]="{ 'has-error': prospectFirstName.touched && prospectFirstName.invalid }">

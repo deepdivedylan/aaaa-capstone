@@ -62,7 +62,7 @@ if(!empty($newEmail)) {
 
 		//update query for updating the application table when a user submits multiple applications
 		$query = "UPDATE application SET applicationFirstName = :firstName, applicationLastName = :lastName, applicationPhoneNumber = :phone, applicationSource = :source, applicationAboutYou = :about, applicationHopeToAccomplish = :goals, applicationExperience = :experience, applicationDateTime = :dateTime WHERE applicationEmail = :email";
-		$statement = $pdo->prepare($query);
+		$statement = $pd;
 
 	   //Checks to see if the user changed anything before updating the database
 		if ($existingAbout === $decodeContent["46813110"] || empty($decodeContent["46813110"])) {
