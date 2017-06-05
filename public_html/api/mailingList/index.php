@@ -7,6 +7,8 @@ require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 use Edu\Cnm\DdcAaaa\Prospect;
 use Edu\Cnm\DdcAaaa\Application;
 use Edu\Cnm\DdcAaaa\Note;
+use Edu\Cnm\DdcAaaa\Cohort;
+use Edu\Cnm\DdcAaaa\ApplicationCohort;
 
 /**
  * api for the prospect class
@@ -44,17 +46,21 @@ try {
 	if($method === "GET") {
 		//set XSRF cookie
 		setXsrfCookie();
-		if(empty($noteTypeId) === false) {
+		if(!empty($noteTypeId) && !empty($cohortId)) {
 
 			$applications = [];
 			$prospects =[];
 
+			$applicationCohorts = ApplicationCohort::getAllApplicationCohorts($pdo);
+			$cohorts = Cohort::getAllCohorts($pdo);
 			$notes = Note::getAllNotes($pdo);
 			$notes = $notes->toArray();
 			if($notes !== null) {
 				foreach ($notes as $note) {
 					if ($note->noteApplicationId !== null) {
+						//where the user defined noteType matches the stored noteType
 						if ($note->noteNoteTypeId === $noteTypeId) {
+							//array key defined as $note->noteApplicationId so that old values are overwritten and we end up with only the most recent entry when placing application objects into the applications array
 							$applications[$note->noteApplicationId] = Application::getApplicationByApplicationId($pdo, $note->noteApplicationId);
 						}
 					}

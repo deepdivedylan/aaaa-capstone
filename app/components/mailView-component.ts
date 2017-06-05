@@ -45,59 +45,15 @@ export class MailViewComponent implements OnInit{
 	) {}
 
 	ngOnInit() : void {
-		this.reloadApplication();
-		this.reloadProspect();
 		this.reloadNoteTypes();
 	}
 
-	reloadApplication()	 : void {
-		this.activatedRoute.params
-			.switchMap((params : Params) => this.applicationService.getApplicationByApplicationId(+params["applicationId"]))
-			.subscribe(application => {
-				this.application = application;
-				this.testDate = application.applicationDateTime;
-				this.note.noteApplicationId = this.application.applicationId;
 
-				this.noteService.getNotesByNoteApplicationId(this.application.applicationId)
-					.subscribe(notes => this.notes = notes.reverse());
-
-				this.applicationCohortService.getApplicationCohortsByApplicationId(this.application.applicationId)
-					.subscribe(applicationCohorts => this.applicationCohorts = applicationCohorts);
-
-			});
-	}
-	reloadProspect()	 : void {
-		this.activatedRoute.params
-			.switchMap((params : Params) => this.prospectService.getProspectByProspectId(+params["prospectId"]))
-			.subscribe(prospect => {
-				this.prospect = prospect[0];
-				this.note.noteProspectId = this.prospect.prospectId;
-
-
-				this.noteService.getNotesByNoteProspectId(this.prospect.prospectId)
-					.subscribe(notes => this.notes = notes.reverse());
-
-				this.prospectCohortService.getProspectCohortsByProspectId(this.prospect.prospectId)
-					.subscribe(prospectCohorts => this.prospectCohorts = prospectCohorts);
-
-
-
-			});
-	}
 	reloadNoteTypes() : void {
 		this.noteTypeService.getAllNoteTypes()
 			.subscribe(noteTypes => this.noteTypes = noteTypes);
 	}
-	createNote() : void {
-		this.noteService.createNote(this.note)
-			.subscribe(status => {
-				this.status = status;
-				if(status.apiStatus === 200) {
-					this.reloadApplication();
-					this.mailView.reset();
-				}
-			});
-	}
+
 
 }
 // export class SimpleFormComp {

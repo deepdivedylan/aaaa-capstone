@@ -11,7 +11,7 @@
 		<div class="col-xs-12">
 
 			<!-- FORM -->
-			<form #noteForm="ngForm" name="detailView" id="detailView" class="form-horizontal well"
+			<form #noteForm="ngForm" name="mailView" id="mailView" class="form-horizontal well"
 					(ngSubmit)="createNote();" novalidate>
 				<label><h4>Create a mailing list by Note Type</h4></label>
 				<select class="form-control" id="noteNoteTypeId" name="noteNoteTypeID"
