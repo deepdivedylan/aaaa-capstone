@@ -12,6 +12,8 @@ import {ProspectCohort} from "../classes/prospectCohort";
 import {NoteType} from "../classes/noteType";
 import {NoteTypeService} from "../services/noteType-service";
 import {Status} from "../classes/status";
+import {Cohort} from "../classes/cohort";
+import {CohortService} from "../services/cohort-service"
 
 import 'rxjs/add/operator/switchMap';
 import {ProspectService} from "../services/prospect-service";
@@ -29,6 +31,7 @@ export class MailViewComponent implements OnInit{
 	prospectCohorts : ProspectCohort[] = [];
 	notes : Note[] = [];
 	note : Note = new Note(null, null, null, null, "", "");
+	cohorts : Cohort[] = [];
 	status: Status = null;
 	noteTypes: NoteType[] = [];
 	testDate: string = null;
@@ -40,18 +43,24 @@ export class MailViewComponent implements OnInit{
 		private noteTypeService: NoteTypeService,
 		private prospectService: ProspectService,
 		private prospectCohortService: ProspectCohortService,
+		private cohortService: CohortService,
 		private router: Router,
 		private activatedRoute: ActivatedRoute
 	) {}
 
 	ngOnInit() : void {
 		this.reloadNoteTypes();
+		this.reloadCohorts();
 	}
 
 
 	reloadNoteTypes() : void {
 		this.noteTypeService.getAllNoteTypes()
 			.subscribe(noteTypes => this.noteTypes = noteTypes);
+	}
+	reloadCohorts() : void {
+		this.cohortService.getAllCohorts()
+			.subscribe(cohorts => this.cohorts = cohorts)
 	}
 
 

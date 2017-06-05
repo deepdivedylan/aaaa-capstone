@@ -20,6 +20,11 @@
 						{{noteType.noteTypeName}}
 					</option>
 				</select>
+				<select class="form-control" id="cohort" name="cohort">
+					<option *ngFor="let cohort of cohorts" value="{{cohort.cohortId}}">
+						{{cohort.cohortName}}
+					</option>
+				</select>
 				<div class="modal-footer">
 					<input type="submit" class="btn btn-info" value="Submit">
 				</div>
