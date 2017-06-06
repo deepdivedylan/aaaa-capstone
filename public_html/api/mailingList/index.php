@@ -4,7 +4,6 @@ require_once(dirname(__DIR__,2) . "/php/classes/autoload.php");
 require_once (dirname(__DIR__,2) . "/php/lib/xsrf.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
-use Edu\Cnm\DdcAaaa\Prospect;
 use Edu\Cnm\DdcAaaa\Application;
 use Edu\Cnm\DdcAaaa\Note;
 use Edu\Cnm\DdcAaaa\Cohort;
@@ -41,6 +40,7 @@ try {
 
 	//sanitize input
 	$noteTypeId = filter_input(INPUT_GET, "noteTypeId", FILTER_VALIDATE_INT);
+	$cohortId = filter_input(INPUT_GET, "cohortId", FILTER_VALIDATE_INT);
 	//$noteTypeId = 5;
 	// handle GET request
 	if($method === "GET") {
@@ -49,7 +49,6 @@ try {
 		if(!empty($noteTypeId) && !empty($cohortId)) {
 
 			$applications = [];
-			$prospects =[];
 
 			$applicationCohorts = ApplicationCohort::getAllApplicationCohorts($pdo);
 			$cohorts = Cohort::getAllCohorts($pdo);
@@ -58,15 +57,8 @@ try {
 			if($notes !== null) {
 				foreach ($notes as $note) {
 					if ($note->noteApplicationId !== null) {
-						//where the user defined noteType matches the stored noteType
 						if ($note->noteNoteTypeId === $noteTypeId) {
-							//array key defined as $note->noteApplicationId so that old values are overwritten and we end up with only the most recent entry when placing application objects into the applications array
 							$applications[$note->noteApplicationId] = Application::getApplicationByApplicationId($pdo, $note->noteApplicationId);
-						}
-					}
-					if ($note->noteProspectId !== null) {
-						if ($note->noteNoteTypeId === $noteTypeId) {
-							$prospects[$note->noteProspectId] = Prospect::getProspectByProspectId($pdo,$note->noteProspectId);
 						}
 					}
 				}
