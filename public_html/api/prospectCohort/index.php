@@ -54,9 +54,21 @@ try {
 				$reply->data = $prospectCohort;
 			}
 		} else if(empty($prospectCohortProspectId) === false) {
-			$prospectCohort = ProspectCohort::getProspectCohortsByProspectId($pdo, $prospectCohortProspectId);
-			if($prospectCohort !== null) {
-				$reply->data = $prospectCohort->toArray();
+			$prospectCohorts = ProspectCohort::getProspectCohortsByProspectId($pdo, $prospectCohortProspectId);
+			if($prospectCohorts !== null) {
+				$storage = new JsonObjectStorage();
+
+				for($i = 0; $i < count($prospectCohorts); $i++){
+					$storage->attach(
+						$prospectCohorts[$i],
+						[
+							Prospect::getProspectByProspectId($pdo, $prospectCohorts[$i]->getProspectCohortProspectId()),
+							Cohort::getCohortByCohortId($pdo, $prospectCohorts[$i]->getProspectCohortCohortId())
+						]
+					);
+				}
+
+				$reply->data = $storage;
 			}
 		} else if(empty($prospectCohortCohortId) === false) {
 			$prospectCohorts = ProspectCohort::getProspectCohortsByCohortId($pdo, $prospectCohortCohortId);

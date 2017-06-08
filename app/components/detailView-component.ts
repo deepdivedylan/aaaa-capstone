@@ -46,6 +46,7 @@ export class DetailViewComponent implements OnInit{
 			.switchMap((params : Params) => this.applicationService.getApplicationByApplicationId(+params["applicationId"]))
 			.subscribe(application => {
 				this.application = application;
+				console.log(this.application);
 				this.testDate = application.applicationDateTime;
 				this.note.noteApplicationId = this.application.applicationId;
 

@@ -26,7 +26,6 @@ export class PrsDetailViewComponent implements OnInit{
 	status: Status = null;
 	noteTypes: NoteType[] = [];
 	noteNoteType: NoteType = null;
-	testDate: string = null;
 
 
 	constructor(
@@ -41,15 +40,17 @@ export class PrsDetailViewComponent implements OnInit{
 	ngOnInit() : void {
 		this.reloadProspect();
 		this.reloadNoteTypes();
-		this.noteTypeNameFetch();
 	}
 
 
 	reloadProspect()	 : void {
+
 		this.activatedRoute.params
 			.switchMap((params : Params) => this.prospectService.getProspectByProspectId(+params["prospectId"]))
 			.subscribe(prospect => {
-				this.prospect = prospect[0];
+				//this.prospect = prospect[0];
+				this.prospect = prospect;
+				console.log(this.prospect);
 				this.note.noteProspectId = this.prospect.prospectId;
 
 
@@ -60,17 +61,11 @@ export class PrsDetailViewComponent implements OnInit{
 					.subscribe(prospectCohorts => this.prospectCohorts = prospectCohorts);
 
 
-
 			});
 	}
 	reloadNoteTypes() : void {
 		this.noteTypeService.getAllNoteTypes()
 			.subscribe(noteTypes => this.noteTypes = noteTypes);
-
-	}
-
-	noteTypeNameFetch() : void {
-
 
 	}
 
@@ -84,6 +79,10 @@ export class PrsDetailViewComponent implements OnInit{
 				}
 			});
 	}
+
+
+
+
 
 }
 // export class SimpleFormComp {
