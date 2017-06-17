@@ -1,0 +1,12 @@
+{
+  "require": {
+    "phpdocumentor/phpdocumentor": "@stable",
+    "phpunit/dbunit": "@stable",
+    "phpunit/phpunit": "@stable",
+    "swiftmailer/swiftmailer": "@stable"
+  },
+  "scripts": {
+    "phpdoc": "./vendor/bin/phpdoc -t doc -d ./public_html/php/classes",
+    "phpunit": "./vendor/bin/phpunit -c ./php/classes/Test --coverage-html coverage"
+  }
+}
