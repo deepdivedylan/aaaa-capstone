@@ -15,13 +15,6 @@
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<form class="navbar-form navbar-right">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search First Name" id="applicantFirstName" name="applicantFirstName" title="applicantFirstName" [(ngModel)]="ApplicationFirstName" (keyup)="searchForApplicationFirstName();">
-				<input type="text" class="form-control" placeholder="Search Last Name" id="applicantLastName" name="applicantLastName" title="applicantLastName" [(ngModel)]="ApplicationLastName" (keyup)="searchForApplicationLastName();">
-			</div>
-			<button type="submit" class="btn btn-default">Search</button>
-		</form>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a routerLink="/">Sign Out</a></li>
 			<li><a routerLink="/pkgView/">Parking</a></li>
