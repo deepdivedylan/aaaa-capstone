@@ -16,14 +16,18 @@ try {
 	if(session_status() !== PHP_SESSION_ACTIVE) {
 		session_start();
 	}
+
+	
 	verifyXsrf();
 	$requestContent = file_get_contents("php://input");
 	$requestObject = json_decode($requestContent);
 
 
 
+
+
 	// filter the username, but let the password be because filter_var() can change the password inadvertently
-	$username = strtolower(filter_var($requestObject->username, FILTER_SANITIZE_STRING));
+	$userName = strtolower(filter_var($requestObject->username, FILTER_SANITIZE_STRING));
 	$password = $requestObject->password;
 
 	// read the active directory configuration
@@ -32,7 +36,7 @@ try {
 	$admusers = json_decode($config["admusers"], true);
 
 	// don't waste time if it's not even an admin user
-	if(in_array($username, $admusers) === false) {
+	if(in_array($userName, $admusers) === false) {
 		throw(new RuntimeException("invalid username/password", 401));
 	}
 
