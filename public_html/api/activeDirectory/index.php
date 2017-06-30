@@ -27,7 +27,7 @@ try {
 
 
 	// filter the username, but let the password be because filter_var() can change the password inadvertently
-	$userName = strtolower(filter_var($requestObject->username, FILTER_SANITIZE_STRING));
+	$username = strtolower(filter_var($requestObject->username, FILTER_SANITIZE_STRING));
 	$password = $requestObject->password;
 
 	// read the active directory configuration
@@ -35,8 +35,9 @@ try {
 	$adconfig = json_decode($config["adconfig"], true);
 	$admusers = json_decode($config["admusers"], true);
 
+
 	// don't waste time if it's not even an admin user
-	if(in_array($userName, $admusers) === false) {
+	if(in_array($username, $admusers) === false) {
 		throw(new RuntimeException("invalid username/password", 401));
 	}
 
@@ -52,6 +53,7 @@ try {
 		$search->select(["displayname", "employeeid"]);
 		$result = $search->findBy("samaccountname", $username);
 		$_SESSION["adUser"] = ["studentId" => $result->getEmployeeId(), "fullName" => $result->getDisplayName(), "loginTime" => time(), "username" => $username];
+		var_dump($_SESSION["adUser"]);
 	} else {
 		throw(new RuntimeException("invalid username/password", 401));
 	}

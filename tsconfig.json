@@ -10,5 +10,9 @@
     "removeComments": false,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true
-  }
+  },
+  "exclude": [
+    "vendor",
+    "node_modules"
+  ]
 }
