@@ -66,7 +66,7 @@ try {
 			if($application !== null) {
 				$reply->data = $application;
 			}
-		} else if(empty($applicationFirstName) === false) {
+		} else if(empty($applicationName) === false) {
 			$applications = Application::getApplicationsByApplicationName($pdo, $applicationName);
 			if($applications !== null) {
 				$reply->data = $applications->toArray();

@@ -7,6 +7,7 @@ import {CohortService} from "../services/cohort-service";
 import {ApplicationCohort} from "../classes/applicationCohort";
 import {ApplicationCohortService} from "../services/applicationCohort-service";
 import {Status} from "../classes/status";
+import {Observable} from "rxjs/Observable";
 
 @Component({
 	templateUrl: "./templates/appView.php"
@@ -15,9 +16,15 @@ import {Status} from "../classes/status";
 export class AppViewComponent implements OnInit{
 	@ViewChild("appView") appView : any;
 	applications : Application[] = [];
+	filteredApplications : Application[] = [];
+
+
 	applicationCohorts : ApplicationCohort[] = [];
 	cohorts : Cohort[] = [];
 	status: Status = null;
+	applicationFilterByName: string;
+	applicationStream : Observable<Application> = null;
+	application : Application = new Application(null,null, null, null, null, null, null, null, null, null, null, null, null);
 
 	constructor(
 		private applicationService: ApplicationService,
@@ -35,12 +42,15 @@ export class AppViewComponent implements OnInit{
 
 	reloadApplications()	 : void {
 		this.applicationService.getAllApplications()
-			.subscribe(applications => this.applications = applications);
+			.subscribe(applications => {
+				this.applications = applications;
+			});
 	}
 
 	reloadApplicationCohorts()	 : void {
 		this.applicationCohortService.getAllApplicationCohorts()
 			.subscribe(applicationCohorts => this.applicationCohorts = applicationCohorts);
+
 	}
 
 	/*filterApplicationsByLastName() : void {
@@ -56,5 +66,12 @@ export class AppViewComponent implements OnInit{
 	}
 	switchApplication(application: Application) : void {
 		this.router.navigate(["/detailView/", application.applicationId]);
+	}
+
+	filterApplicationByName() : void {
+		if(this.applicationFilterByName !== null) {
+			this.filteredApplications = this.applications
+				.filter((application: Application) =>application.applicationFirstName.indexOf(this.applicationFilterByName));
+		}
 	}
 }
