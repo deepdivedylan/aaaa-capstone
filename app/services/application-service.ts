@@ -42,7 +42,7 @@ export class ApplicationService extends BaseService {
 			.map(this.extractData)
 			._catch(this.handleError);
 	}
-	getApplicationsByApplicationLastName (applicationLastName: string,) : Observable<Application[]>{
+	getApplicationsByApplicationName (applicationLastName: string,) : Observable<Application[]>{
 		return(this.http.get(this.applicationUrl + applicationLastName))
 			.map(this.extractData)
 			.catch(this.handleError);

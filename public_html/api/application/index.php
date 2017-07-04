@@ -37,8 +37,8 @@ try {
 
 	//sanitize input
 	$applicationId = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
-	$applicationFirstName = filter_input(INPUT_GET, "applicationFirstName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$applicationLastName = filter_input(INPUT_GET, "applicationLastName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$applicationName = filter_input(INPUT_GET, "applicationName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	//$applicationLastName = filter_input(INPUT_GET, "applicationLastName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$applicationEmail = filter_input(INPUT_GET, "applicationEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$applicationPhoneNumber = filter_input(INPUT_GET, "applicationPhoneNumber", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$applicationSource = filter_input(INPUT_GET, "applicationSource", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -67,15 +67,11 @@ try {
 				$reply->data = $application;
 			}
 		} else if(empty($applicationFirstName) === false) {
-			$applications = Application::getApplicationsByApplicationName($pdo, $applicationFirstName);
+			$applications = Application::getApplicationsByApplicationName($pdo, $applicationName);
 			if($applications !== null) {
 				$reply->data = $applications->toArray();
 			}
-		} else if(empty($applicationLastName) === false) {
-			$applications = Application::getApplicationsByApplicationName($pdo, $applicationLastName);
-			if($applications !== null) {
-				$reply->data = $applications->toArray();
-			}
+
 		} else if(empty($applicationEmail) === false) {
 			$application = Application::getApplicationByApplicationEmail($pdo, $applicationEmail);
 			if($application !== null) {
