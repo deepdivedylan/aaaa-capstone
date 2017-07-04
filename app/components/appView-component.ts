@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
+import {Component, OnInit, ViewChild, OnChanges} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
 import {Application} from "../classes/application";
 import {ApplicationService} from "../services/application-service";
@@ -13,7 +13,7 @@ import {Observable} from "rxjs/Observable";
 	templateUrl: "./templates/appView.php"
 })
 
-export class AppViewComponent implements OnInit{
+export class AppViewComponent implements OnInit, OnChanges{
 	@ViewChild("appView") appView : any;
 	applications : Application[] = [];
 	filteredApplications : Application[] = [];
@@ -39,6 +39,8 @@ export class AppViewComponent implements OnInit{
 		this.reloadApplicationCohorts();
 		this.reloadCohorts();
 	}
+	ngOnChanges() : void {
+}
 
 	reloadApplications()	 : void {
 		this.applicationService.getAllApplications()
