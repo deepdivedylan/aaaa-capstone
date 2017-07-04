@@ -2,6 +2,12 @@
 <section class="container-fluid">
 
 	<div class="row application-page">
+
+		<div class="row">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Search Application By Name" [(ngModel)]="applicationFilterByName" (keyup)="filterApplicationByName()" >
+			</div>
+		</div>
 		<div class="col-xs-10 col-xs-offset-1 well">
 			<h2>Applications</h2>
 			<table class="table table-bordered table-hover">

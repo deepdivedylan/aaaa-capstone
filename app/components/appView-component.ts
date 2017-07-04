@@ -23,7 +23,7 @@ export class AppViewComponent implements OnInit{
 	cohorts : Cohort[] = [];
 	status: Status = null;
 	applicationFilterByName: string;
-	applicationStream : Observable<Application> = null;
+	//applicationStream : Observable<Application> = null;
 	application : Application = new Application(null,null, null, null, null, null, null, null, null, null, null, null, null);
 
 	constructor(
