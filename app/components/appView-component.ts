@@ -23,7 +23,6 @@ export class AppViewComponent implements OnInit, OnChanges{
 	applicationCohorts : ApplicationCohort[] = [];
 	cohorts : Cohort[] = [];
 	status: Status = null;
-	applicationFilterByName: string;
 
 	//observable used for searching Applications by name
 	termStream = new Subject<string>();
@@ -45,9 +44,9 @@ export class AppViewComponent implements OnInit, OnChanges{
 	}
 
 	ngOnInit() : void {
-		this.reloadApplications();
+		//this.reloadApplications();
 		this.reloadApplicationCohorts();
-		this.reloadCohorts();
+		//this.reloadCohorts();
 	}
 	ngOnChanges() : void {
 
@@ -78,6 +77,9 @@ export class AppViewComponent implements OnInit, OnChanges{
 		this.applicationService.getApplicationsByApplicationName(term)
 			.subscribe(applications => {
 				this.filteredApplications = applications
+
+				// now that I have this done I can use it as a template for applicationCohort.
+
 			});
 		console.log(this.filteredApplications);
 	}
