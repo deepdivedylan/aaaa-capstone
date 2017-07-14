@@ -63,18 +63,17 @@
 										<form #noteForm="ngForm" name="detailView" id="detailView" class="form-horizontal well"
 												(ngSubmit)="createNote();" novalidate>
 											<div class="modal-body">
-												<div class="form-group"
-													  [ngClass]="{ 'has-error': noteContent.touched && noteContent.invalid }">
+												<div class="form-group" >
 													<label for="noteContent">Content:</label>
 													<div class="input-group">
 														<div class="input-group-addon">
 															<i class="fa fa-comment" aria-hidden="true"></i>
 														</div>
 														<textarea name="noteContent" id="noteContent" class="form-control"
-																	 maxlength="300" required [(ngModel)]="note.noteContent"
+																	  required [(ngModel)]="note.noteContent"
 																	 #noteContent="ngModel" rows="5"></textarea>
 													</div>
-													<div>Max Length of 300 characters: {{noteContent.value.length}}</div>
+													<div>Max Length of 300 characters</div>
 													<div [hidden]="noteContent.valid || noteContent.pristine"
 														  class="alert alert-danger" role="alert">
 														<p *ngIf="noteContent.errors?.required">Note content is required.</p>

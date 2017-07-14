@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Observable";
 import {BaseService} from "./base-service";
 import {Application} from "../classes/application";
 import {Status} from "../classes/status";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class ApplicationService extends BaseService {
@@ -42,16 +43,9 @@ export class ApplicationService extends BaseService {
 			.map(this.extractData)
 			._catch(this.handleError);
 	}
-	getApplicationsByApplicationName (applicationLastName: string,) : Observable<Application[]>{
-		return(this.http.get(this.applicationUrl + applicationLastName))
+	getApplicationsByApplicationName (applicationName : string ) : Observable<Application[]>{
+		return(this.http.get(this.applicationUrl + "?applicationName=" + applicationName))
 			.map(this.extractData)
 			.catch(this.handleError);
 	}
-
-	createApplication(application: Application) : Observable<Status> {
-		return(this.http.post(this.applicationUrl, application)
-			.map(this.extractMessage)
-			.catch(this.handleError));
-	}
-
 }

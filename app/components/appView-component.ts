@@ -8,7 +8,8 @@ import {ApplicationCohort} from "../classes/applicationCohort";
 import {ApplicationCohortService} from "../services/applicationCohort-service";
 import {Status} from "../classes/status";
 import {Observable} from "rxjs/Observable";
-
+import {Subject} from 'rxjs/Subject';
+import {subscribeOn} from "rxjs/operator/subscribeOn";
 @Component({
 	templateUrl: "./templates/appView.php"
 })
@@ -23,7 +24,10 @@ export class AppViewComponent implements OnInit, OnChanges{
 	cohorts : Cohort[] = [];
 	status: Status = null;
 	applicationFilterByName: string;
-	//applicationStream : Observable<Application> = null;
+
+	//observable used for searching Applications by name
+	termStream = new Subject<string>();
+
 	application : Application = new Application(null,null, null, null, null, null, null, null, null, null, null, null, null);
 
 	constructor(
@@ -31,8 +35,14 @@ export class AppViewComponent implements OnInit, OnChanges{
 		private applicationCohortService: ApplicationCohortService,
 		private cohortService: CohortService,
 		private router: Router,
-		private route: ActivatedRoute
-	) {}
+		private route: ActivatedRoute,
+
+
+
+
+	) {
+		this.termStream.subscribe(term  => this.filterApplicationByName(term));
+	}
 
 	ngOnInit() : void {
 		this.reloadApplications();
@@ -40,7 +50,8 @@ export class AppViewComponent implements OnInit, OnChanges{
 		this.reloadCohorts();
 	}
 	ngOnChanges() : void {
-}
+
+	}
 
 	reloadApplications()	 : void {
 		this.applicationService.getAllApplications()
@@ -55,13 +66,6 @@ export class AppViewComponent implements OnInit, OnChanges{
 
 	}
 
-	/*filterApplicationsByLastName() : void {
-		this.applicationService.getApplicationsByApplicationLastName()
-			.subscribe(applications => this.applications = applications);
-	}*/
-
-	// filterApplicationsByFirstName
-
 	reloadCohorts() : void {
 		this.cohortService.getAllCohorts()
 			.subscribe(cohorts => this.cohorts = cohorts);
@@ -70,10 +74,11 @@ export class AppViewComponent implements OnInit, OnChanges{
 		this.router.navigate(["/detailView/", application.applicationId]);
 	}
 
-	filterApplicationByName() : void {
-		if(this.applicationFilterByName !== null) {
-			this.filteredApplications = this.applications
-				.filter((application: Application) =>application.applicationFirstName.indexOf(this.applicationFilterByName));
-		}
+	filterApplicationByName(term : string ) : void {
+		this.applicationService.getApplicationsByApplicationName(term)
+			.subscribe(applications => {
+				this.filteredApplications = applications
+			});
+		console.log(this.filteredApplications);
 	}
 }

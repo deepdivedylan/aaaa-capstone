@@ -3,9 +3,8 @@
 	<div class="row">
 		<div class="col-xs-10 col-xs-offset-1">
 			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Search Application By Name"
-						 [(ngModel)]="applicationFilterByName" >
-				<span class="input-group-addon"><i class="fa fa-search" (click)="filterApplicationByName();"></i></span>
+
+				<input (input)="termStream.next($event.target.value)" >
 			</div>
 		</div>
 	</div>
