@@ -82,11 +82,14 @@ try {
 				// create a json object storage
 				$storage = new JsonObjectStorage();
 
+				// loop through each application and grab the cohort and application cohort it belongs to.\
 				foreach ($applications as $application) {
 
+					//grab the application cohort by the application Id and grab the cohort by the ApplicationCohortId
 					$applicationCohort = ApplicationCohort::getApplicationCohortsByApplicationId($pdo, $application->getApplicationid());
 					$cohort= Cohort::getCohortByCohortId($pdo, $applicationCohort[0]->getApplicationCohortCohortId());
 
+					//store the results of the database queries into a json storage object in the same format as the rest of getBy methods
 					$storage->attach(
 						$applicationCohort, [
 							$application,
@@ -94,8 +97,8 @@ try {
 						]
 					);
 				}
-
-
+				// stage the json storage object to send to the front end.
+				$reply->data = $storage;
 			}
 		} else {
 			$applicationCohorts = ApplicationCohort::getAllApplicationCohorts($pdo);
