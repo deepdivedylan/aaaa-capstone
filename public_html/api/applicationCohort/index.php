@@ -41,6 +41,7 @@ try {
 	$applicationCohortId = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 	$applicationCohortApplicationId = filter_input(INPUT_GET, "applicationCohortApplicationId", FILTER_VALIDATE_INT);
 	$applicationCohortCohortId = filter_input(INPUT_GET, "applicationCohortCohortId", FILTER_VALIDATE_INT);
+	$applicationName = filter_input(INPUT_GET, "applicationName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	// handle GET request
 	if($method === "GET") {
 		//set XSRF cookie
@@ -73,6 +74,17 @@ try {
 			$applicationCohorts = ApplicationCohort::getApplicationCohortsByCohortId($pdo, $applicationCohortCohortId);
 			if($applicationCohorts !== null) {
 				$reply->data = $applicationCohorts->toArray();
+			}
+		} else if(empty($applicationName) === false) {
+			$applications = Application::getApplicationsByApplicationName($pdo, $applicationName);
+			if ($applications !== null ) {
+				// create a json object storage
+				$storage = new JsonObjectStorage();
+
+				foreach($applications as $application) {
+					$applicationCohort = ApplicationCohort::getApplicationCohortsByApplicationId($pdo, $application->getApplicationid());
+				}
+				var_dump($applications);
 			}
 		} else {
 			$applicationCohorts = ApplicationCohort::getAllApplicationCohorts($pdo);
