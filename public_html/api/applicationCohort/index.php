@@ -78,20 +78,23 @@ try {
 		} else if(empty($applicationName) === false) {
 			$applications = Application::getApplicationsByApplicationName($pdo, $applicationName);
 			if ($applications !== null ) {
+
 				// create a json object storage
 				$storage = new JsonObjectStorage();
 
-				foreach($applications as $application) {
+				foreach ($applications as $application) {
+
 					$applicationCohort = ApplicationCohort::getApplicationCohortsByApplicationId($pdo, $application->getApplicationid());
-					var_dump($applicationCohort);
-					//$cohort= Cohort::getCohortByCohortId($pdo, $applicationCohort->get)
+					$cohort= Cohort::getCohortByCohortId($pdo, $applicationCohort[0]->getApplicationCohortCohortId());
+
 					$storage->attach(
 						$applicationCohort, [
-							$application
-
+							$application,
+							$cohort
 						]
 					);
 				}
+
 
 			}
 		} else {
