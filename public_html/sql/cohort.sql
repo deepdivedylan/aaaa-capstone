@@ -82,6 +82,16 @@ INSERT INTO applicationCohort (applicationCohortId, applicationCohortApplication
 
 INSERT INTO applicationCohort (applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId)
 	VALUE (NULL, 2, 2);
+INSERT INTO applicationCohort (applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId)
+	VALUE (NULL, 3, 2);
+INSERT INTO applicationCohort (applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId)
+	VALUE (NULL, 4, 2);
+INSERT INTO applicationCohort (applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId)
+VALUE (NULL, 5, 2);
+INSERT INTO applicationCohort (applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId)
+	VALUE (NULL, 6, 1);
+INSERT INTO applicationCohort (applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId)
+	VALUE (NULL, 7, 1);
 INSERT INTO statusType (statusTypeId, statusTypeName)  VALUE (1, "Checked Out");
 INSERT INTO statusType (statusTypeId, statusTypeName) VALUE (2, "Checked In");
 INSERT INTO placard (placardId, placardNumber, placardStatusTypeId) VALUES (NULL, 1, 1);

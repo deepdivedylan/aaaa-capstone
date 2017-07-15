@@ -83,8 +83,16 @@ try {
 
 				foreach($applications as $application) {
 					$applicationCohort = ApplicationCohort::getApplicationCohortsByApplicationId($pdo, $application->getApplicationid());
+					var_dump($applicationCohort);
+					//$cohort= Cohort::getCohortByCohortId($pdo, $applicationCohort->get)
+					$storage->attach(
+						$applicationCohort, [
+							$application
+
+						]
+					);
 				}
-				var_dump($applications);
+
 			}
 		} else {
 			$applicationCohorts = ApplicationCohort::getAllApplicationCohorts($pdo);
