@@ -42,5 +42,12 @@ export class ApplicationCohortService extends BaseService {
 			.map(this.extractMessage)
 			.catch(this.handleError));
 	}
+
+	getApplicationCohortsByApplicationName(applicationName : string) : Observable<ApplicationCohort[]> {
+
+		return(this.http.get(this.applicationCohortUrl + "?applicationName=" + applicationName)
+			.map(this.extractData)
+			.catch(this.handleError));
+	}
 	
 }

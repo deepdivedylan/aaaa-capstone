@@ -1,17 +1,13 @@
 <navbar></navbar>
 <section class="container-fluid">
-	<div class="row">
-		<div class="col-xs-10 col-xs-offset-1">
-			<div class="input-group">
-
-				<input (input)="termStream.next($event.target.value)" >
-			</div>
-		</div>
-	</div>
 	<div class="row application-page">
-
 		<div class="col-xs-10 col-xs-offset-1 well">
+			<div class="input-group">
+				<span class="input-group-addon">Search By Name</span>
+				<input  type="text" class="form-control"  aria-describedby="Search Applications by Name" (input)="termStream.next($event.target.value)">
+			</div>
 			<h2>Applications</h2>
+
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
@@ -32,6 +28,7 @@
 						<td>{{ applicationCohort.info[0].applicationDateTime | date: 'medium' }}</td>
 					</tr>
 				</tbody>
+
 			</table>
 		</div><!--end of .table-responsive-->
 	</div>

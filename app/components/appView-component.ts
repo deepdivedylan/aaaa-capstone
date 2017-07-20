@@ -1,23 +1,21 @@
-import {Component, OnInit, ViewChild, OnChanges} from "@angular/core";
-import {Router, ActivatedRoute} from "@angular/router";
+import {Component, OnInit, ViewChild} from "@angular/core";
+import {Router} from "@angular/router";
 import {Application} from "../classes/application";
-import {ApplicationService} from "../services/application-service";
+
 import {Cohort} from "../classes/cohort";
-import {CohortService} from "../services/cohort-service";
 import {ApplicationCohort} from "../classes/applicationCohort";
 import {ApplicationCohortService} from "../services/applicationCohort-service";
 import {Status} from "../classes/status";
-import {Observable} from "rxjs/Observable";
 import {Subject} from 'rxjs/Subject';
-import {subscribeOn} from "rxjs/operator/subscribeOn";
+import  "rxjs/operator/debounce";
 @Component({
 	templateUrl: "./templates/appView.php"
 })
 
-export class AppViewComponent implements OnInit, OnChanges{
+export class AppViewComponent implements OnInit{
 	@ViewChild("appView") appView : any;
 	applications : Application[] = [];
-	filteredApplications : Application[] = [];
+	filteredApplications : ApplicationCohort[] = [];
 
 
 	applicationCohorts : ApplicationCohort[] = [];
@@ -29,34 +27,13 @@ export class AppViewComponent implements OnInit, OnChanges{
 
 	application : Application = new Application(null,null, null, null, null, null, null, null, null, null, null, null, null);
 
-	constructor(
-		private applicationService: ApplicationService,
-		private applicationCohortService: ApplicationCohortService,
-		private cohortService: CohortService,
-		private router: Router,
-		private route: ActivatedRoute,
-
-
-
-
-	) {
-		this.termStream.subscribe(term  => this.filterApplicationByName(term));
+	constructor(private applicationCohortService: ApplicationCohortService, private router: Router) {
+		this.termStream
+			.subscribe(term  => this.filterApplicationByName(term));
 	}
 
 	ngOnInit() : void {
-		//this.reloadApplications();
 		this.reloadApplicationCohorts();
-		//this.reloadCohorts();
-	}
-	ngOnChanges() : void {
-
-	}
-
-	reloadApplications()	 : void {
-		this.applicationService.getAllApplications()
-			.subscribe(applications => {
-				this.applications = applications;
-			});
 	}
 
 	reloadApplicationCohorts()	 : void {
@@ -65,22 +42,19 @@ export class AppViewComponent implements OnInit, OnChanges{
 
 	}
 
-	reloadCohorts() : void {
-		this.cohortService.getAllCohorts()
-			.subscribe(cohorts => this.cohorts = cohorts);
-	}
 	switchApplication(application: Application) : void {
 		this.router.navigate(["/detailView/", application.applicationId]);
 	}
 
 	filterApplicationByName(term : string ) : void {
-		this.applicationService.getApplicationsByApplicationName(term)
-			.subscribe(applications => {
-				this.filteredApplications = applications
-
-				// now that I have this done I can use it as a template for applicationCohort.
-
+		this.applicationCohortService.getApplicationCohortsByApplicationName(term)
+			.debounceTime(30000)
+			.subscribe(applicationCohort => {
+				this.applicationCohorts = applicationCohort;
+				if (this.filteredApplications !== null) {
+					console.log("I work");
+					console.log(this.applicationCohorts);
+				}
 			});
-		console.log(this.filteredApplications);
 	}
 }
