@@ -11,8 +11,8 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
-						<th>Last</th>
 						<th>First</th>
+						<th>Last</th>
 						<th>Email</th>
 						<th>Cohort</th>
 						<th>Date</th>
