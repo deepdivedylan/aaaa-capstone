@@ -738,6 +738,58 @@ class Application implements \JsonSerializable {
 //		return $objects;
 //	}
 
+	public static function getApplicationByCohortAndNoteType(\PDO $pdo, int $noteNoteTypeId, int $cohortId) {
+
+		//verify that noteNoteTypeId and applicationCohortId is positive
+		if ($noteNoteTypeId <=0){
+			throw(new \PDOException("applicationId not positive"));
+		}
+
+		if ($cohortId <=0){
+			throw(new \PDOException("applicationId not positive"));
+		}
+
+		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationSource, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime,applicationUtmCampaign,applicationUtmMedium, applicationUtmSource
+FROM note
+	INNER JOIN applicationCohort ON applicationCohort.applicationCohortApplicationId = note.noteApplicationId
+	INNER JOIN application ON application.applicationId = applicationCohort.applicationCohortApplicationId
+	INNER JOIN cohort ON applicationCohort.applicationCohortCohortId = cohort.cohortId
+WHERE cohortId = :cohortId AND noteNoteTypeId = :noteNoteTypeId";
+		$statement = $pdo->prepare($query);
+
+		$parameters = ["cohortId" => $cohortId, "noteNoteTypeId" => $noteNoteTypeId];
+		$statement->execute($parameters);
+
+		$applications = new \SplFixedArray($statement->rowCount());
+		$statement->execute(\PDO::FETCH_ASSOC);
+
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$application = new Application($row["applicationId"],
+					$row["applicationFirstName"],
+					$row["applicationLastName"],
+					$row["applicationEmail"],
+					$row["applicationPhoneNumber"],
+					$row["applicationSource"],
+					$row["applicationAboutYou"],
+					$row["applicationHopeToAccomplish"],
+					$row["applicationExperience"],
+					\DateTime::createFromFormat("Y-m-d H:i:s",$row["applicationDateTime"]),
+					$row["applicationUtmCampaign"],
+					$row["applicationUtmMedium"],
+					$row["applicationUtmSource"]
+				);
+
+				$applications[$applications->key()] = $application;
+				$applications->next();
+			} catch(\Exception $exception) {
+
+			}
+		}
+		return ($applications);
+
+	}
+
 	public static function getAllApplications(\PDO $pdo){
 		// create query template
 		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application";
