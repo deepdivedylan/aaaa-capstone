@@ -4,7 +4,9 @@ require_once(dirname(__DIR__, 2) . "/php/classes/autoload.php");
 require_once(dirname(__DIR__, 2) . "/php/lib/xsrf.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
-use Edu\Cnm\DdcAaaa\Application;
+use Edu\Cnm\DdcAaaa\{
+	Application, Cohort
+};
 
 /**
  * api for the application class
@@ -51,6 +53,8 @@ try {
 	$applicationUtmCampaign = filter_input(INPUT_GET, "applicationUtmCampaign", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$applicationUtmMedium = filter_input(INPUT_GET, "applicationUtmMedium", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$applicationUtmSource = filter_input(INPUT_GET, "applicationUtmSource", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$noteNoteTypeId = filter_input(INPUT_GET, "noteNoteTypeId", FILTER_VALIDATE_INT);
+	$cohortName = filter_input(INPUT_GET, "cohortName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 	$startDate = filter_input(INPUT_GET, "startDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$endDate = filter_input(INPUT_GET, "endDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -59,6 +63,9 @@ try {
 	if($method === "GET") {
 		//set XSRF cookie
 		setXsrfCookie();
+
+		var_dump($noteNoteTypeId);
+		var_dump($cohortId);
 
 		//get a specific application or all applications and update reply
 		if(empty($applicationId) === false) {
@@ -71,7 +78,19 @@ try {
 			if($applications !== null) {
 				$reply->data = $applications->toArray();
 			}
+		} else if(empty ($noteNoteTypeId && $cohortName) === false) {
+			$cohort = Cohort::getCohortByCohortName($pdo, $cohortName);
+			if($cohort === null) {
+				throw(new \InvalidArgumentException("cohort does not exist", 404));
+			} else {
 
+				$cohortId = $cohort->getCohortId();
+
+				$application = Application::getApplicationByCohortAndNoteType($pdo, $cohortId, $noteNoteTypeId);
+				if($application !== null) {
+					$reply->data = $application;
+				}
+			}
 		} else if(empty($applicationEmail) === false) {
 			$application = Application::getApplicationByApplicationEmail($pdo, $applicationEmail);
 			if($application !== null) {
@@ -111,7 +130,7 @@ try {
 		if(empty($requestObject->applicationEmail) === true) {
 			throw(new \InvalidArgumentException ("application Email is missing.", 405));
 		}
-		
+
 		// make sure application PhoneNumber is available (required field)
 		if(empty($requestObject->applicationPhoneNumber) === true) {
 			throw(new \InvalidArgumentException ("application PhoneNumber is missing.", 405));
@@ -156,7 +175,7 @@ try {
 		if(empty($requestObject->applicationUtmSource) === true) {
 			throw(new \InvalidArgumentException ("application UtmSource is missing.", 405));
 		}
-		
+
 		//perform the actual post
 		if($method === "POST") {
 
@@ -171,7 +190,7 @@ try {
 				$requestObject->applicationAboutYou,
 				$requestObject->applicationHopeToAccomplish,
 				$requestObject->applicationExperience,
-				\DateTime::createFromFormat("Y-m-d",$requestObject->applicationDateTime),
+				\DateTime::createFromFormat("Y-m-d", $requestObject->applicationDateTime),
 				$requestObject->applicationUtmCampaign,
 				$requestObject->applicationUtmMedium,
 				$requestObject->applicationUtmSource

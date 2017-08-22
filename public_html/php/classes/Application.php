@@ -738,7 +738,7 @@ class Application implements \JsonSerializable {
 //		return $objects;
 //	}
 
-	public static function getApplicationByCohortAndNoteType(\PDO $pdo, int $noteNoteTypeId, int $cohortId) {
+	public static function getApplicationByCohortAndNoteType(\PDO $pdo,int $cohortId, int $noteNoteTypeId)  {
 
 		//verify that noteNoteTypeId and applicationCohortId is positive
 		if ($noteNoteTypeId <=0){
