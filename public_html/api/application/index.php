@@ -64,9 +64,6 @@ try {
 		//set XSRF cookie
 		setXsrfCookie();
 
-		var_dump($noteTypeId);
-		var_dump($cohortId);
-
 		//get a specific application or all applications and update reply
 		if(empty($applicationId) === false) {
 			$application = Application::getApplicationByApplicationId($pdo, $applicationId);
