@@ -20,7 +20,7 @@ import {ProspectService} from "../services/prospect-service";
 import {ProspectCohortService} from "../services/prospectCohort-service";
 
 @Component({
-	templateUrl: "./templates/mailView.php"
+	templateUrl: "./templates/mailView.html"
 })
 
 export class MailViewComponent implements OnInit{

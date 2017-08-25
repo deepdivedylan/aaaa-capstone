@@ -9,7 +9,7 @@ import {ProspectCohortService} from "../services/prospectCohort-service";
 import {Status} from "../classes/status";
 
 @Component({
-	templateUrl: "./templates/prsView.php"
+	templateUrl: "./templates/prsView.html"
 })
 
 export class PrsViewComponent implements OnInit{

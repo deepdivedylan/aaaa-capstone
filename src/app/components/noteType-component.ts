@@ -5,7 +5,7 @@ import {NoteType} from "../classes/noteType";
 import {Status} from "../classes/status";
 
 @Component({
-	templateUrl: "./templates/noteType.php"
+	templateUrl: "./templates/noteType.html"
 })
 
 export class NoteTypeComponent implements OnInit {

@@ -10,7 +10,7 @@ import 'rxjs/add/operator/switchMap';
 
 @Component({
 	selector: "navbar",
-	templateUrl: "./templates/navbar.php"
+	templateUrl: "./templates/navbar.html"
 })
 
 export class NavbarComponent implements OnInit {

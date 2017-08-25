@@ -9,7 +9,7 @@ import {Status} from "../classes/status";
 import {Subject} from 'rxjs/Subject';
 import  "rxjs/operator/debounce";
 @Component({
-	templateUrl: "./templates/appView.php"
+	templateUrl: "./templates/appView.html"
 })
 
 export class AppViewComponent implements OnInit{

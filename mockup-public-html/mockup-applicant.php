@@ -20,8 +20,8 @@
 		<section>
 			<div class="container">
 				<ul class="nav nav-tabs nav-justified">
-					<li role="presentation"><a href="/public_html/templates/appView.php">Applicants</a></li>
-					<li role="presentation"><a href="/public_html/templates/prsView.php">Prospects</a></li>
+					<li role="presentation"><a href="/public_html/templates/appView.html">Applicants</a></li>
+					<li role="presentation"><a href="/public_html/templates/prsView.html">Prospects</a></li>
 				</ul>
 				<div class="row">
 					<div class="col-sm-12">

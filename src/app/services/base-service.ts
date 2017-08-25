@@ -3,7 +3,7 @@ import {Observable} from "rxjs/Observable";
 import {Status} from "../classes/status";
 
 export abstract class BaseService {
-	constructor(protected http: Http) {}
+	constructor(protected http: Http, ) {}
 
 	protected extractData(response: Response) : any {
 		if(response.status < 200 || response.status >= 300) {

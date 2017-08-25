@@ -14,7 +14,7 @@ import {Status} from "../classes/status";
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-	templateUrl: "./templates/detailView.php"
+	templateUrl: "./templates/detailView.html"
 })
 
 export class DetailViewComponent implements OnInit{

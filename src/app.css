@@ -4,7 +4,7 @@
 
 body, html{
 	font-family: 'Coda', cursive;
-	background: url("images/stemcenter.jpg") 100% fixed;
+	background: url("app/images/stemcenter.jpg") 100% fixed;
 
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -17,7 +17,7 @@ body, html{
 /*this is how to inject pictures into those funny jumbotrons*/
 /*HOME PAGE*/
 .jumbotron {
-	background: url("images/login-page.png");
+	background: url("app/images/login-page.png");
 	align-self: flex-end;
 	background: transparent;
 }
@@ -27,14 +27,14 @@ textarea {
 }
 
 .login {
-	background: url("images/login-page.png");
+	background: url("app/images/login-page.png");
 	background-size: 100%;
 	min-height: 100vh;
 }
 
 /*LOGIN PAGE*/
 div.signup-content {
-	background-image: url("images/login-page.png");
+	background-image: url("app/images/login-page.png");
 	background-size: 100%;
 	min-height: 100vh;
 	padding-left: 15px;
@@ -42,7 +42,7 @@ div.signup-content {
 
 /*SIGN IN PAGE*/
 div.signin-content{
-	background-image: url("images/login-page.png");
+	background-image: url("app/images/login-page.png");
 	background-size: cover;
 	min-height: 100vh;
 	border-radius: 0;

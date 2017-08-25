@@ -7,7 +7,7 @@ import {Cohort} from "../classes/cohort";
 import {CohortService} from "../services/cohort-service";
 
 @Component({
-	templateUrl: "./templates/mobView.php"
+	templateUrl: "./templates/mobView.html"
 })
 
 export class MobViewComponent implements OnInit{

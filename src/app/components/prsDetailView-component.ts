@@ -14,7 +14,7 @@ import {Status} from "../classes/status";
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-	templateUrl: "./templates/prsDetailView.php"
+	templateUrl: "./templates/prsDetailView.html"
 })
 
 export class PrsDetailViewComponent implements OnInit{

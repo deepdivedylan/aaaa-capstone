@@ -5,10 +5,10 @@ var helpers = require('./helpers');
 
 module.exports = {
 	entry: {
-		'polyfills': helpers.root('app') + '/polyfills.ts',
-		'vendor': helpers.root('app') + '/vendor.ts',
-		'app': helpers.root('app') + '/app.ts',
-		'css': helpers.root('app') + '/app.css'
+		'polyfills': helpers.root('src') + '/polyfills.ts',
+		'vendor': helpers.root('src') + '/vendor.ts',
+		'app': helpers.root('src') + '/main.ts',
+		'css': helpers.root('src') + '/app.css'
 	},
 
 	resolve: {
@@ -18,7 +18,7 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.(html|php)$/,
+				test: /\.html$/,
 				loader: 'html-loader'
 			},
 			{
@@ -50,8 +50,8 @@ module.exports = {
 
 		new HtmlWebpackPlugin({
 			inject: 'head',
-			filename: helpers.root('public_html') + '/index.php',
-			template: helpers.root('webpack') + '/index.php'
+			filename: helpers.root('public_html') + '/index.html',
+			template: helpers.root('webpack') + '/index.html'
 		})
 	]
 };

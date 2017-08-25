@@ -12,7 +12,7 @@ import {StudentPermit} from "../classes/studentPermit";
 import {Status} from "../classes/status";
 
 @Component({
-	templateUrl: "./templates/pkgView.php"
+	templateUrl: "./templates/pkgView.html"
 })
 
 export class PkgViewComponent implements OnInit{

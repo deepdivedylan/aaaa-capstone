@@ -4,7 +4,7 @@ import {ActiveDirectoryService} from "../services/activeDirectory-service"
 import {ActiveDirectory} from "../classes/activeDirectory";
 
 @Component({
-	templateUrl: "./templates/loginView.php"
+	templateUrl: "./templates/loginView.html"
 })
 
 export class LoginViewComponent {
