@@ -53,8 +53,8 @@ try {
 	$applicationUtmCampaign = filter_input(INPUT_GET, "applicationUtmCampaign", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$applicationUtmMedium = filter_input(INPUT_GET, "applicationUtmMedium", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$applicationUtmSource = filter_input(INPUT_GET, "applicationUtmSource", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$noteNoteTypeId = filter_input(INPUT_GET, "noteNoteTypeId", FILTER_VALIDATE_INT);
-	$cohortName = filter_input(INPUT_GET, "cohortName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$noteTypeId = filter_input(INPUT_GET, "noteTypeId", FILTER_VALIDATE_INT);
+	$cohortId = filter_input(INPUT_GET, "cohortId", FILTER_VALIDATE_INT);
 
 	$startDate = filter_input(INPUT_GET, "startDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$endDate = filter_input(INPUT_GET, "endDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -64,7 +64,7 @@ try {
 		//set XSRF cookie
 		setXsrfCookie();
 
-		var_dump($noteNoteTypeId);
+		var_dump($noteTypeId);
 		var_dump($cohortId);
 
 		//get a specific application or all applications and update reply
@@ -78,18 +78,11 @@ try {
 			if($applications !== null) {
 				$reply->data = $applications->toArray();
 			}
-		} else if(empty ($noteNoteTypeId && $cohortName) === false) {
-			$cohort = Cohort::getCohortByCohortName($pdo, $cohortName);
-			if($cohort === null) {
-				throw(new \InvalidArgumentException("cohort does not exist", 404));
-			} else {
-
-				$cohortId = $cohort->getCohortId();
-
-				$application = Application::getApplicationByCohortAndNoteType($pdo, $cohortId, $noteNoteTypeId);
-				if($application !== null) {
-					$reply->data = $application;
-				}
+		} else if(empty ($noteTypeId && $cohortId) === false) {
+			//WHERE cohortId = 2 AND noteNoteTypeId = 5;
+			$applications = Application::getApplicationByCohortIdAndNoteTypeId($pdo, $cohortId, $noteTypeId);
+			if($applications !== null) {
+				$reply->data = $applications->toArray();
 			}
 		} else if(empty($applicationEmail) === false) {
 			$application = Application::getApplicationByApplicationEmail($pdo, $applicationEmail);

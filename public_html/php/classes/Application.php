@@ -738,7 +738,7 @@ class Application implements \JsonSerializable {
 //		return $objects;
 //	}
 
-	public static function getApplicationByCohortAndNoteType(\PDO $pdo,int $cohortId, int $noteNoteTypeId)  {
+	public static function getApplicationByCohortIdAndNoteTypeId(\PDO $pdo,int $cohortId, int $noteNoteTypeId)  {
 
 		//verify that noteNoteTypeId and applicationCohortId is positive
 		if ($noteNoteTypeId <=0){
@@ -749,7 +749,7 @@ class Application implements \JsonSerializable {
 			throw(new \PDOException("applicationId not positive"));
 		}
 
-		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationSource, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime,applicationUtmCampaign,applicationUtmMedium, applicationUtmSource
+		$query = "SELECT DISTINCT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationSource, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime,applicationUtmCampaign,applicationUtmMedium, applicationUtmSource
 FROM note
 	INNER JOIN applicationCohort ON applicationCohort.applicationCohortApplicationId = note.noteApplicationId
 	INNER JOIN application ON application.applicationId = applicationCohort.applicationCohortApplicationId

@@ -5,6 +5,7 @@ import {BaseService} from "./base-service";
 import {Application} from "../classes/application";
 import {Status} from "../classes/status";
 import {Subject} from "rxjs/Subject";
+import {map} from "rxjs/operator/map";
 
 @Injectable()
 export class ApplicationService extends BaseService {
@@ -45,6 +46,12 @@ export class ApplicationService extends BaseService {
 	}
 	getApplicationsByApplicationName (applicationName : string ) : Observable<Application[]>{
 		return(this.http.get(this.applicationUrl + "?applicationName=" + applicationName)
+			.map(this.extractData)
+			.catch(this.handleError));
+	}
+
+	getApplicationsByNoteTypeIdandCohortName (noteTypeId: string, cohortId: number) : Observable<Application[]> {
+		return(this.http.get(this.applicationUrl+ "?noteTypeId=" + noteTypeId +"&cohortId=" + cohortId)
 			.map(this.extractData)
 			.catch(this.handleError));
 	}
