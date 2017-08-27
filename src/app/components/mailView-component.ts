@@ -25,17 +25,15 @@ import {ProspectCohortService} from "../services/prospectCohort-service";
 
 export class MailViewComponent implements OnInit{
 	@ViewChild("mailView") mailView : any;
+
 	application : Application = new Application(null, "", "", "", "", "", "", "", "", "", "", "", "");
 	applications : Application[] = [];
-	//applicationCohorts : ApplicationCohort[] = [];
-	//prospect : Prospect = new Prospect(null, "", "", "", "");
-	//prospectCohorts : ProspectCohort[] = [];
-	//notes : Note[] = [];
-	// note : Note = new Note(null, null, null, null, "", "");
 	cohorts : Cohort[] = [];
-	status: Status = null;
 	noteTypes: NoteType[] = [];
-	testDate: string = null;
+	status: Status = null;
+	selectCohort: number;
+	selectNote: number;
+
 
 	constructor(
 		private applicationService: ApplicationService,
@@ -47,7 +45,7 @@ export class MailViewComponent implements OnInit{
 		private cohortService: CohortService,
 		// private router: Router,
 		// private activatedRoute: ActivatedRoute
-	) {this.getApplicationsByCohortIdAndNoteTypeId();}
+	) {}
 
 	ngOnInit() : void {
 
@@ -65,8 +63,8 @@ export class MailViewComponent implements OnInit{
 			.subscribe(cohorts => this.cohorts = cohorts)
 	}
 
-	getApplicationsByCohortIdAndNoteTypeId() : void {
-		this.applicationService.getApplicationsByNoteTypeIdAndCohortId(2 ,5)
+	getApplicationsByCohortIdAndNoteTypeId(cohortId : number, noteId : number ) : void {
+		this.applicationService.getApplicationsByNoteTypeIdAndCohortId(cohortId,noteId)
 			.subscribe(applications => this.applications = applications)
 	}
 
