@@ -14,8 +14,8 @@
 			<form #noteForm="ngForm" name="mailView" id="mailView" class="form-horizontal well"
 					(ngSubmit)="createNote();" novalidate>
 				<label><h4>Create a mailing list by Note Type</h4></label>
-				<select class="form-control" id="noteNoteTypeId" name="noteNoteTypeID"
-						  [(ngModel)]="note.noteNoteTypeId" required>
+				<select class="form-control" id="noteTypeEmailSelect" name="noteTypeEmailSelect"
+						  required>
 					<option *ngFor="let noteType of noteTypes" value="{{noteType.noteTypeId}}">
 						{{noteType.noteTypeName}}
 					</option>
@@ -33,9 +33,11 @@
 
 
 
-			<div>get fucked
-			 <div *ngFor="let application of applications  "></div>
-				<div>{{application.applicationEmail}}</div>
+			<div>
+			 <div *ngFor="let application of applications  ">
+				 <div>< {{application.applicationEmail}} </div>
+			 </div>
+
 			</div>
 		</div>
 	</div>

@@ -25,7 +25,7 @@ import {ProspectCohortService} from "../services/prospectCohort-service";
 
 export class MailViewComponent implements OnInit{
 	@ViewChild("mailView") mailView : any;
-	//application : Application = new Application(null, "", "", "", "", "", "", "", "", "", "", "", "");
+	application : Application = new Application(null, "", "", "", "", "", "", "", "", "", "", "", "");
 	applications : Application[] = [];
 	//applicationCohorts : ApplicationCohort[] = [];
 	//prospect : Prospect = new Prospect(null, "", "", "", "");

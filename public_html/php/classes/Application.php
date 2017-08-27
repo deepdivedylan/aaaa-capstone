@@ -769,12 +769,11 @@ WHERE cohortId = :cohortId AND noteNoteTypeId = :noteNoteTypeId";
 
 		$parameters = ["cohortId" => $cohortId, "noteNoteTypeId" => $noteNoteTypeId];
 
-		//var_dump($parameters);
 		$statement->execute($parameters);
 
 
 		$applications = new \SplFixedArray($statement->rowCount());
-		$statement->execute(\PDO::FETCH_ASSOC);
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 
 		while(($row = $statement->fetch()) !== false) {
 			try {
