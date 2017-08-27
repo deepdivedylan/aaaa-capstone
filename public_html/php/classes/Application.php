@@ -738,7 +738,17 @@ class Application implements \JsonSerializable {
 //		return $objects;
 //	}
 
-	public static function getApplicationByCohortIdAndNoteTypeId(\PDO $pdo,int $cohortId, int $noteNoteTypeId)  {
+	/**
+	 * get applications by fuzzy name search - takes a string and matches against both first and last names
+	 * @param \PDO $pdo pdo object
+	 * @param int $cohortId primary to search for
+	 * @param int $noteNoteTypeId primary to search for
+	 * @return \SplFixedArray array of applications found
+	 * @throws \PDOException if there is an sql error
+	 * @throws \TypeError if $applicationName is not a string
+	 */
+
+	public static function getApplicationByCohortIdAndNoteTypeId(\PDO $pdo, int $cohortId, int $noteNoteTypeId)  {
 
 		//verify that noteNoteTypeId and applicationCohortId is positive
 		if ($noteNoteTypeId <=0){
@@ -758,7 +768,10 @@ WHERE cohortId = :cohortId AND noteNoteTypeId = :noteNoteTypeId";
 		$statement = $pdo->prepare($query);
 
 		$parameters = ["cohortId" => $cohortId, "noteNoteTypeId" => $noteNoteTypeId];
+
+		//var_dump($parameters);
 		$statement->execute($parameters);
+
 
 		$applications = new \SplFixedArray($statement->rowCount());
 		$statement->execute(\PDO::FETCH_ASSOC);
