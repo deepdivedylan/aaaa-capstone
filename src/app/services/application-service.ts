@@ -50,7 +50,7 @@ export class ApplicationService extends BaseService {
 			.catch(this.handleError));
 	}
 
-	getApplicationsByNoteTypeIdandCohortName (noteTypeId: string, cohortId: number) : Observable<Application[]> {
+	getApplicationsByNoteTypeIdAndCohortId( cohortId: number, noteTypeId: number) : Observable<Application[]> {
 		return(this.http.get(this.applicationUrl+ "?noteTypeId=" + noteTypeId +"&cohortId=" + cohortId)
 			.map(this.extractData)
 			.catch(this.handleError));

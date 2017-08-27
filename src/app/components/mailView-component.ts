@@ -25,12 +25,13 @@ import {ProspectCohortService} from "../services/prospectCohort-service";
 
 export class MailViewComponent implements OnInit{
 	@ViewChild("mailView") mailView : any;
-	application : Application = new Application(null, "", "", "", "", "", "", "", "", "", "", "", "");
-	applicationCohorts : ApplicationCohort[] = [];
-	prospect : Prospect = new Prospect(null, "", "", "", "");
-	prospectCohorts : ProspectCohort[] = [];
-	notes : Note[] = [];
-	note : Note = new Note(null, null, null, null, "", "");
+	//application : Application = new Application(null, "", "", "", "", "", "", "", "", "", "", "", "");
+	applications : Application[] = [];
+	//applicationCohorts : ApplicationCohort[] = [];
+	//prospect : Prospect = new Prospect(null, "", "", "", "");
+	//prospectCohorts : ProspectCohort[] = [];
+	//notes : Note[] = [];
+	// note : Note = new Note(null, null, null, null, "", "");
 	cohorts : Cohort[] = [];
 	status: Status = null;
 	noteTypes: NoteType[] = [];
@@ -38,17 +39,18 @@ export class MailViewComponent implements OnInit{
 
 	constructor(
 		private applicationService: ApplicationService,
-		private applicationCohortService: ApplicationCohortService,
-		private noteService: NoteService,
+		// private applicationCohortService: ApplicationCohortService,
+		// private noteService: NoteService,
 		private noteTypeService: NoteTypeService,
-		private prospectService: ProspectService,
-		private prospectCohortService: ProspectCohortService,
+		// private prospectService: ProspectService,
+		// private prospectCohortService: ProspectCohortService,
 		private cohortService: CohortService,
-		private router: Router,
-		private activatedRoute: ActivatedRoute
-	) {}
+		// private router: Router,
+		// private activatedRoute: ActivatedRoute
+	) {this.getApplicationsByCohortIdAndNoteTypeId();}
 
 	ngOnInit() : void {
+
 		this.reloadNoteTypes();
 		this.reloadCohorts();
 	}
@@ -61,6 +63,11 @@ export class MailViewComponent implements OnInit{
 	reloadCohorts() : void {
 		this.cohortService.getAllCohorts()
 			.subscribe(cohorts => this.cohorts = cohorts)
+	}
+
+	getApplicationsByCohortIdAndNoteTypeId() : void {
+		this.applicationService.getApplicationsByNoteTypeIdAndCohortId(2 ,5)
+			.subscribe(applications => this.applications = applications)
 	}
 
 
