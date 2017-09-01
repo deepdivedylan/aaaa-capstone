@@ -14,8 +14,8 @@
 			<form #noteForm="ngForm" name="mailView" id="mailView" class="form-horizontal well"
 					(ngSubmit)="getApplicationsByCohortIdAndNoteTypeId();" novalidate>
 				<label><h4>Create a mailing list by Note Type</h4></label>
-				<select class="form-control" id="noteTypeEmailSelect" name="noteTypeEmailSelect"
-						  required>
+				<select [(ngModel)]="" class="form-control" id="noteTypeEmailSelect" name="noteTypeEmailSelect"
+						  required >
 					<option *ngFor="let noteType of noteTypes" value="{{noteType.noteTypeId}}">
 						{{noteType.noteTypeName}}
 					</option>
