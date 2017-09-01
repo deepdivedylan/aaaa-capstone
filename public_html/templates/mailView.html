@@ -6,22 +6,22 @@
 		</div>
 	</div>
 </div>
-<div class="container">
+ <div class="container">
 	<div class="row">
 		<div class="col-xs-12">
 
 			<!-- FORM -->
 			<form #noteForm="ngForm" name="mailView" id="mailView" class="form-horizontal well"
 					(ngSubmit)="getApplicationsByCohortIdAndNoteTypeId();" novalidate>
-				<label><h4>Create a mailing list by Note Type</h4></label>
-				<select [(ngModel)]="" class="form-control" id="noteTypeEmailSelect" name="noteTypeEmailSelect"
-						  required >
-					<option *ngFor="let noteType of noteTypes" value="{{noteType.noteTypeId}}">
+
+				<label class="noteTypeBold" >Create a mailing list by Note Type</label>
+				<select  class="form-control" id="noteType" name="noteTypeEmailSelect" required [ngModel]="" >
+					<option *ngFor="let noteType of noteTypes" [value]="noteType">
 						{{noteType.noteTypeName}}
 					</option>
 				</select>
-				<select class="form-control" id="cohort" name="cohort">
-					<option *ngFor="let cohort of cohorts" value="{{cohort.cohortId}}">
+				<select class="form-control" id="cohort" name="cohort" required  >
+					<option *ngFor="let cohort of cohorts" [value]="cohort">
 						{{cohort.cohortName}}
 					</option>
 				</select>

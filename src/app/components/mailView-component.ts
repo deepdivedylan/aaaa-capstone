@@ -63,8 +63,8 @@ export class MailViewComponent implements OnInit{
 			.subscribe(cohorts => this.cohorts = cohorts)
 	}
 
-	getApplicationsByCohortIdAndNoteTypeId(cohortId : number, noteId : number ) : void {
-		this.applicationService.getApplicationsByNoteTypeIdAndCohortId(cohortId,noteId)
+	getApplicationsByCohortIdAndNoteTypeId(cohort : number, note : number ) : void {
+		this.applicationService.getApplicationsByNoteTypeIdAndCohortId(cohort, note)
 			.subscribe(applications => this.applications = applications)
 	}
 
