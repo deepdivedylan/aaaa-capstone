@@ -14,7 +14,7 @@ import {Status} from "../classes/status";
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-	templateUrl: "./templates/detailView.html"
+	templateUrl: "./templates/detailView.html",
 })
 
 export class DetailViewComponent implements OnInit{
@@ -46,7 +46,7 @@ export class DetailViewComponent implements OnInit{
 			.switchMap((params : Params) => this.applicationService.getApplicationByApplicationId(+params["applicationId"]))
 			.subscribe(application => {
 				this.application = application;
-				console.log(this.application);
+
 				this.testDate = application.applicationDateTime;
 				this.note.noteApplicationId = this.application.applicationId;
 

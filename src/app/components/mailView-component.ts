@@ -18,21 +18,20 @@ import {CohortService} from "../services/cohort-service"
 import 'rxjs/add/operator/switchMap';
 import {ProspectService} from "../services/prospect-service";
 import {ProspectCohortService} from "../services/prospectCohort-service";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
 	templateUrl: "./templates/mailView.html"
 })
 
 export class MailViewComponent implements OnInit{
-	@ViewChild("mailView") mailView : any;
+	//@ViewChild("mailView") mailView : any;
 
 	application : Application = new Application(null, "", "", "", "", "", "", "", "", "", "", "", "");
 	applications : Application[] = [];
 	cohorts : Cohort[] = [];
 	noteTypes: NoteType[] = [];
 	status: Status = null;
-	selectCohort: number;
-	selectNote: number;
 
 
 	constructor(
@@ -43,7 +42,7 @@ export class MailViewComponent implements OnInit{
 		// private prospectService: ProspectService,
 		// private prospectCohortService: ProspectCohortService,
 		private cohortService: CohortService,
-		// private router: Router,
+		private router: Router,
 		// private activatedRoute: ActivatedRoute
 	) {}
 
@@ -66,13 +65,21 @@ export class MailViewComponent implements OnInit{
 	getApplicationsByCohortIdAndNoteTypeId(cohort : number, note : number ) : void {
 		this.applicationService.getApplicationsByNoteTypeIdAndCohortId(cohort, note)
 			.subscribe(applications => this.applications = applications)
+
+	}
+
+	static getNoteTypeAndCohortEmails(applications: Application[] ) : any {
+
+		let cohortAndNoteTypesEmails = [];
+
+		for(let app of applications) {
+			cohortAndNoteTypesEmails.push(app.applicationEmail)
+		}
+		return cohortAndNoteTypesEmails
+	}
+	switchApplication(application: Application) : void {
+		this.router.navigate(["/detailView/", application.applicationId]);
 	}
 
 
 }
-// export class SimpleFormComp {
-// 	onSubmit(f: NgForm) {
-// 		console.log(f.value);  // { first: '', last: '' }
-// 		console.log(f.valid);  // false
-// 	}
-// }

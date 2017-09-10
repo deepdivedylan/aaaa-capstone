@@ -1,44 +1,59 @@
 <navbar></navbar>
-<div class="container">
-	<div class="row" xmlns="http://www.w3.org/1999/html">
-		<div class="col-xs-12 col-md-12 col-lg-12">
-
-		</div>
-	</div>
-</div>
- <div class="container">
+ <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
 
 			<!-- FORM -->
 			<form #noteForm="ngForm" name="mailView" id="mailView" class="form-horizontal well"
-					(ngSubmit)="getApplicationsByCohortIdAndNoteTypeId();" novalidate>
+					(ngSubmit)="getApplicationsByCohortIdAndNoteTypeId(noteForm.value.selectedCohort, noteForm.value.noteTypeEmail);" novalidate>
 
 				<label class="noteTypeBold" >Create a mailing list by Note Type</label>
-				<select  class="form-control" id="noteType" name="noteTypeEmailSelect" required [ngModel]="" >
-					<option *ngFor="let noteType of noteTypes" [value]="noteType">
+				<select  class="form-control" name="noteTypeEmail" required [ngModel]="noteTypeEmail" #noteTypeEmail="ngModel" >
+					<option *ngFor="let noteType of noteTypes" [value]="noteType.noteTypeId">
 						{{noteType.noteTypeName}}
 					</option>
 				</select>
-				<select class="form-control" id="cohort" name="cohort" required  >
-					<option *ngFor="let cohort of cohorts" [value]="cohort">
+				<select class="form-control" name="selectedCohort" required [ngModel]="selectedCohort" #selectedCohort="ngModel"  >
+					<option *ngFor="let cohort of cohorts" [value]="cohort.cohortId">
 						{{cohort.cohortName}}
 					</option>
 				</select>
 				<div class="modal-footer">
 					<input type="submit" class="btn btn-info" value="Submit">
+					<button class="btn btn-link" type="button" value="click" (click)="getNoteTypeAndCohortEmails(applications);">email</button>
 				</div>
 			</form>
 			<!-- FORM -->
-
-
-
-			<div>
-			 <div *ngFor="let application of applications  ">
-				 <div>< {{application.applicationEmail}} </div>
-			 </div>
-
-			</div>
 		</div>
 	</div>
+
+	 <div class="row">
+		 <div class="col-md-12 well">
+			 <h2>Applications</h2>
+
+			 <table class="table table-bordered table-hover">
+				 <thead>
+					 <tr>
+						 <th>First</th>
+						 <th>Last</th>
+						 <th>Email</th>
+						 <th>Cohort</th>
+						 <th>Date</th>
+					 </tr>
+				 </thead>
+				 <tbody>
+					 <tr *ngFor="let application of applications"
+						  (click)="switchApplication(application);">
+						 <td>{{ application.applicationFirstName }}</td>
+						 <td>{{ application.applicationLastName }}</td>
+						 <td>{{ application.applicationEmail }}</td>
+						 <td>{{ application.applicationDateTime | date: 'shortDate' }}</td>
+					 </tr>
+				 </tbody>
+
+			 </table>
+		 </div><!--end of .table-responsive-->
+	 </div>
+
+
 </div>
