@@ -37,7 +37,7 @@ try {
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	//sanitize input
-	$prospectId = filter_input(INPUT_GET, "prospectId", FILTER_VALIDATE_INT);
+	$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 	$prospectFirstName = filter_input(INPUT_GET, "prospectFirstName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$prospectLastName = filter_input(INPUT_GET, "prospectLastName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$prospectEmail = filter_input(INPUT_GET, "prospectEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -51,8 +51,8 @@ try {
 		setXsrfCookie();
 
 		//get a specific prospect or all prospects and update reply
-		if(empty($prospectId) === false) {
-			$prospect = Prospect::getProspectByProspectId($pdo, $prospectId);
+		if(empty($id) === false) {
+			$prospect = Prospect::getProspectByProspectId($pdo, $id);
 			if($prospect !== null) {
 				$reply->data = $prospect;
 			}

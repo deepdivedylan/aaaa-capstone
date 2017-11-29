@@ -38,8 +38,8 @@ export class PrsDetailViewComponent implements OnInit{
 	) {}
 
 	ngOnInit() : void {
-		this.reloadProspect();
-		this.reloadNoteTypes();
+	this.reloadProspect();
+		//this.reloadNoteTypes();
 	}
 
 
