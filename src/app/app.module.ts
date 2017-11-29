@@ -14,6 +14,7 @@ import {NoteService} from "./services/note-service";
 import {ProspectCohortService} from "./services/prospectCohort-service";
 import {ActiveDirectoryService} from "./services/activeDirectory-service";
 import {SessionService} from "./services/session-service";
+import {APP_BASE_HREF} from "@angular/common";
 
 const moduleDeclarations = [AppComponent];
 
@@ -24,6 +25,7 @@ const moduleDeclarations = [AppComponent];
 	providers:    [
 		appRoutingProviders,
 		NoteTypeService,
+		{provide: APP_BASE_HREF, useValue: window["_base_href"]},
 		ApplicationService,
 		ProspectService,
 		NoteService,

@@ -38,6 +38,7 @@ module.exports = {
 
 
 	plugins: [
+
 		new webpack.optimize.CommonsChunkPlugin({
 			name: ['app', 'vendor', 'polyfills']
 		}),
@@ -47,6 +48,8 @@ module.exports = {
 			jQuery: "jquery",
 			"window.jQuery": "jquery"
 		}),
+
+		new webpack.ContextReplacementPlugin(/@angular(\\|\/)core(\\|\/)/, helpers.root("src")),
 
 		new HtmlWebpackPlugin({
 			inject: 'head',
